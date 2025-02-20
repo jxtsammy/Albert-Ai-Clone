@@ -3,7 +3,7 @@ body{
 }
 
 .navbar {
-  position: absolute;
+  position: fixed;
   top: 0;
   right: 0;
   width: 100%;
@@ -12,6 +12,7 @@ body{
   justify-content: flex-end;
   align-items: center;
   padding: 10px 20px;
+  z-index: 1;
 }
 
 .client-login {

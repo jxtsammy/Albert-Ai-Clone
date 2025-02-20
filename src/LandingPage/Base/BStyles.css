@@ -1,0 +1,162 @@
+/* Hero Section */
+.hero-container {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  justify-content: left;
+  background: #0d0d0d;
+  overflow: hidden;
+  color: white;
+  text-align: left;
+  padding: 30px;
+}
+
+/* Logo */
+.hero-logo {
+  width: 120px;
+  margin-bottom: 0px;
+  padding-top: 110px;
+}
+
+/* Typewriter Header */
+h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  width: 500px;
+  text-align: left;
+  margin-bottom: 100px;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.hero-highlight {
+  color: #ff8800;
+}
+
+.hero-typewriter {
+  color: #ffffff;
+}
+
+/* Learn More Button */
+.hero-learn-more {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  background: #CEFF00;
+  color: white;
+  cursor: pointer;
+  border-radius: 0px;
+  transition: background 0.3s ease-in-out;
+  color: black;
+  border: none;
+}
+
+.hero-learn-more:hover {
+  background: #CEFF00;
+}
+
+.hero-floating-squares {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.hero-square {
+  position: absolute;
+  width: 20px;
+  height: 30px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 3px;
+  animation: hero-floatSquares linear infinite;
+  opacity: 0.8;
+}
+
+/* Random Positions */
+.hero-square:nth-child(51) { top: 5%; left: 88%; }
+.hero-square:nth-child(52) { top: 16%; left: 73%; }
+.hero-square:nth-child(53) { top: 28%; left: 19%; }
+.hero-square:nth-child(54) { top: 34%; left: 62%; }
+.hero-square:nth-child(55) { top: 46%; left: 41%; }
+.hero-square:nth-child(56) { top: 57%; left: 94%; }
+.hero-square:nth-child(57) { top: 63%; left: 11%; }
+.hero-square:nth-child(58) { top: 75%; left: 55%; }
+.hero-square:nth-child(59) { top: 84%; left: 33%; }
+.hero-square:nth-child(60) { top: 92%; left: 70%; }
+
+.hero-square:nth-child(61) { top: 7%; left: 25%; }
+.hero-square:nth-child(62) { top: 21%; left: 53%; }
+.hero-square:nth-child(63) { top: 39%; left: 68%; }
+.hero-square:nth-child(64) { top: 47%; left: 79%; }
+.hero-square:nth-child(65) { top: 54%; left: 14%; }
+.hero-square:nth-child(66) { top: 66%; left: 42%; }
+.hero-square:nth-child(67) { top: 73%; left: 87%; }
+.hero-square:nth-child(68) { top: 81%; left: 10%; }
+.hero-square:nth-child(69) { top: 95%; left: 52%; }
+.hero-square:nth-child(70) { top: 12%; left: 77%; }
+
+.hero-square:nth-child(71) { top: 20%; left: 36%; }
+.hero-square:nth-child(72) { top: 33%; left: 90%; }
+.hero-square:nth-child(73) { top: 45%; left: 27%; }
+.hero-square:nth-child(74) { top: 56%; left: 61%; }
+.hero-square:nth-child(75) { top: 67%; left: 85%; }
+.hero-square:nth-child(76) { top: 79%; left: 32%; }
+.hero-square:nth-child(77) { top: 88%; left: 50%; }
+.hero-square:nth-child(78) { top: 96%; left: 21%; }
+.hero-square:nth-child(79) { top: 9%; left: 69%; }
+.hero-square:nth-child(80) { top: 18%; left: 46%; }
+
+.hero-square:nth-child(81) { top: 29%; left: 99%; }
+.hero-square:nth-child(82) { top: 38%; left: 20%; }
+.hero-square:nth-child(83) { top: 49%; left: 72%; }
+.hero-square:nth-child(84) { top: 55%; left: 95%; }
+.hero-square:nth-child(85) { top: 68%; left: 30%; }
+.hero-square:nth-child(86) { top: 76%; left: 56%; }
+.hero-square:nth-child(87) { top: 85%; left: 89%; }
+.hero-square:nth-child(88) { top: 93%; left: 11%; }
+.hero-square:nth-child(89) { top: 6%; left: 44%; }
+.hero-square:nth-child(90) { top: 17%; left: 62%; }
+
+.hero-square:nth-child(91) { top: 31%; left: 75%; }
+.hero-square:nth-child(92) { top: 43%; left: 18%; }
+.hero-square:nth-child(93) { top: 58%; left: 81%; }
+.hero-square:nth-child(94) { top: 65%; left: 47%; }
+.hero-square:nth-child(95) { top: 71%; left: 92%; }
+.hero-square:nth-child(96) { top: 83%; left: 28%; }
+.hero-square:nth-child(97) { top: 91%; left: 67%; }
+.hero-square:nth-child(98) { top: 98%; left: 39%; }
+.hero-square:nth-child(99) { top: 14%; left: 55%; }
+.hero-square:nth-child(100) { top: 26%; left: 82%; }
+
+
+
+/* Different Sizes */
+.hero-square:nth-child(odd) { width: 12px; height: 12px; }
+.hero-square:nth-child(even) { width: 18px; height: 18px; }
+
+/* Color Variations */
+.hero-square:nth-child(4n) { background: #ffcc00; }
+.hero-square:nth-child(3n) { background: #007bff; }
+.hero-square:nth-child(5n) { background: #cccccc; }
+
+/* Floating Animation */
+@keyframes hero-floatSquares {
+  0% {
+    transform: translateY(0) translateX(0);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(-50px) translateX(30px);
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateY(-100px) translateX(-30px);
+    opacity: 0;
+  }
+}
+
+/* Random Animation Durations */
+.hero-square:nth-child(5n) { animation-duration: 3s; }
+.hero-square:nth-child(3n) { animation-duration: 4s; }
+.hero-square:nth-child(7n) { animation-duration: 6s; }
