@@ -13,19 +13,21 @@
 
 /* Logo */
 .hero-logo {
-  width: 120px;
+  width: 130px;
   margin-bottom: 0px;
   padding-top: 110px;
+  z-index: 1;
 }
 
 /* Typewriter Header */
 h1 {
-  font-size: 2.5rem;
+  font-size: 55px;
   font-weight: bold;
   width: 500px;
   text-align: left;
   margin-bottom: 100px;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  z-index: 1;
 }
 
 .hero-highlight {
@@ -40,7 +42,7 @@ h1 {
 .hero-learn-more {
   margin-top: 20px;
   padding: 10px 20px;
-  font-size: 1.2rem;
+  font-size: 1rem;
   background: #CEFF00;
   color: white;
   cursor: pointer;
@@ -48,6 +50,8 @@ h1 {
   transition: background 0.3s ease-in-out;
   color: black;
   border: none;
+  z-index: 1;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 .hero-learn-more:hover {
@@ -57,7 +61,7 @@ h1 {
 .hero-floating-squares {
   position: absolute;
   top: 0;
-  left: 0;
+  left:300px;
   width: 100%;
   height: 100%;
   overflow: hidden;
@@ -74,6 +78,61 @@ h1 {
 }
 
 /* Random Positions */
+.hero-square:nth-child(1) { top: 5%; left: 12%; }
+.hero-square:nth-child(2) { top: 18%; left: 34%; }
+.hero-square:nth-child(3) { top: 27%; left: 82%; }
+.hero-square:nth-child(4) { top: 43%; left: 67%; }
+.hero-square:nth-child(5) { top: 56%; left: 21%; }
+.hero-square:nth-child(6) { top: 62%; left: 48%; }
+.hero-square:nth-child(7) { top: 77%; left: 90%; }
+.hero-square:nth-child(8) { top: 88%; left: 10%; }
+.hero-square:nth-child(9) { top: 93%; left: 50%; }
+.hero-square:nth-child(10) { top: 7%; left: 75%; }
+
+.hero-square:nth-child(11) { top: 22%; left: 5%; }
+.hero-square:nth-child(12) { top: 35%; left: 95%; }
+.hero-square:nth-child(13) { top: 48%; left: 38%; }
+.hero-square:nth-child(14) { top: 61%; left: 82%; }
+.hero-square:nth-child(15) { top: 73%; left: 58%; }
+.hero-square:nth-child(16) { top: 85%; left: 30%; }
+.hero-square:nth-child(17) { top: 91%; left: 72%; }
+.hero-square:nth-child(18) { top: 10%; left: 42%; }
+.hero-square:nth-child(19) { top: 29%; left: 66%; }
+.hero-square:nth-child(20) { top: 47%; left: 15%; }
+
+.hero-square:nth-child(21) { top: 53%; left: 89%; }
+.hero-square:nth-child(22) { top: 68%; left: 25%; }
+.hero-square:nth-child(23) { top: 79%; left: 55%; }
+.hero-square:nth-child(24) { top: 92%; left: 35%; }
+.hero-square:nth-child(25) { top: 12%; left: 80%; }
+.hero-square:nth-child(26) { top: 24%; left: 48%; }
+.hero-square:nth-child(27) { top: 38%; left: 8%; }
+.hero-square:nth-child(28) { top: 50%; left: 65%; }
+.hero-square:nth-child(29) { top: 64%; left: 40%; }
+.hero-square:nth-child(30) { top: 78%; left: 92%; }
+
+.hero-square:nth-child(31) { top: 88%; left: 18%; }
+.hero-square:nth-child(32) { top: 97%; left: 62%; }
+.hero-square:nth-child(33) { top: 15%; left: 30%; }
+.hero-square:nth-child(34) { top: 31%; left: 70%; }
+.hero-square:nth-child(35) { top: 44%; left: 90%; }
+.hero-square:nth-child(36) { top: 58%; left: 22%; }
+.hero-square:nth-child(37) { top: 74%; left: 14%; }
+.hero-square:nth-child(38) { top: 89%; left: 49%; }
+.hero-square:nth-child(39) { top: 98%; left: 78%; }
+.hero-square:nth-child(40) { top: 8%; left: 55%; }
+
+.hero-square:nth-child(41) { top: 26%; left: 12%; }
+.hero-square:nth-child(42) { top: 39%; left: 87%; }
+.hero-square:nth-child(43) { top: 52%; left: 33%; }
+.hero-square:nth-child(44) { top: 69%; left: 76%; }
+.hero-square:nth-child(45) { top: 81%; left: 29%; }
+.hero-square:nth-child(46) { top: 95%; left: 64%; }
+.hero-square:nth-child(47) { top: 11%; left: 41%; }
+.hero-square:nth-child(48) { top: 36%; left: 58%; }
+.hero-square:nth-child(49) { top: 55%; left: 82%; }
+.hero-square:nth-child(50) { top: 67%; left: 37%; }
+
 .hero-square:nth-child(51) { top: 5%; left: 88%; }
 .hero-square:nth-child(52) { top: 16%; left: 73%; }
 .hero-square:nth-child(53) { top: 28%; left: 19%; }
