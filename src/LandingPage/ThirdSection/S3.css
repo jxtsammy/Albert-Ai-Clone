@@ -74,7 +74,7 @@
   width: 40px;
   height: 40px;
   background-color: #088a6a;
-  animation: float 3s infinite ease-in-out alternate;
+  animation: float 2s infinite ease-in-out alternate;
 }
 
 /* Positioning each square differently */

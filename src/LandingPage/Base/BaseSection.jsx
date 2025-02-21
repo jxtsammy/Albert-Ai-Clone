@@ -16,8 +16,6 @@ const Hero = () => {
               <Typewriter
                 words={["self-learning digital marketin ally", "is executing and optimizing every step of your campaign", "is unprecedented impact"]}
                 loop={true}
-                cursor
-                cursorStyle="|"
                 typeSpeed={150}
                 deleteSpeed={150}
                 delaySpeed={1500}

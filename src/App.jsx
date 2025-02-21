@@ -3,13 +3,19 @@ import React from 'react'
 import Navigation from './Navigation/NavigationBar'
 import Home from './LandingPage/Home'
 import Footer from './Footer/Footer'
+import Login from './Access Forms/Login/Login'
 function App() {
 
   return (
     <div>
-      <Navigation />
+
+      {/*
+       <Navigation />
       <Home />
       <Footer />
+      */}
+      <Login />
+
     </div>
   )
 }

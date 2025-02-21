@@ -6,6 +6,7 @@ import youtubeIcon from '../../assets/youtubeColorful.svg';
 import tiktokIcon from '../../assets/tik-tok-png-logo-1.png';
 import display from '../../assets/DV360-logo.png';
 import logo from '../../assets/albertzoomd-logo_01-01.png';
+import { Typewriter } from "react-simple-typewriter";
 
 const features = [
   { icon: bingIcon, text: 'Bing' },
@@ -25,7 +26,13 @@ const ResultsSection = () => {
       {/* Title */}
       <div className='title-container'>
         <h2 className="primary-heading">
-          operates in your paid search, social, programmatic accounts
+          <Typewriter
+                words={["operates in your paid search, social, programmatic accounts"]}
+                loop={1}
+                typeSpeed={150}
+                deleteSpeed={150}
+                delaySpeed={1500}
+              />
         </h2>
 
         <div className="floating-animation">
