@@ -2,6 +2,7 @@
   position: relative;
   text-align: left;
   width: 98.8vw;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: flex-start;

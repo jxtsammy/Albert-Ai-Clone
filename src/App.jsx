@@ -14,12 +14,11 @@ function App() {
       {/*
         <Navigation />
       <Home />
-
+      <Footer />
       <Login />
       <Signup/>
-      <AboutUs />
       */}
-      <Footer />
+      <AboutUs />
 
     </div>
   )

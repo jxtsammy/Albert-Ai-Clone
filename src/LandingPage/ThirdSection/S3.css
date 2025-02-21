@@ -2,7 +2,7 @@
   text-align: left;
   padding: 30px;
   background-color: #ccc; /* Light gray background */
-  height: 95vh;
+  height: 100vh;
 }
 
 /* Logo */
@@ -38,7 +38,7 @@
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   font-weight: bold;
   margin-top: 40px;
-  margin-bottom: 100px;
+  margin-bottom: 0px;
 }
 
 /* Features Grid */

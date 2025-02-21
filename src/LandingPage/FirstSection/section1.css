@@ -90,7 +90,7 @@ html, body {
   margin-bottom: 80px;
 }
 
-.square {
+.fsquare {
   width: 20px;
   height: 20px;
   margin: 5px;
@@ -118,7 +118,7 @@ html, body {
   100% { transform: scale(1); }  /* Contract back */
 }
 
-.square {
+.fsquare {
   width: 25px;
   height: 25px;
   margin: 10px;
@@ -126,14 +126,14 @@ html, body {
 }
 
 /* Add different delays to create a sequence effect */
-.square:nth-child(1) { animation-delay: 0s; }
-.square:nth-child(2) { animation-delay: 1s; }
-.square:nth-child(3) { animation-delay: 2s; }
-.square:nth-child(4) { animation-delay: 3s; }
-.square:nth-child(5) { animation-delay: 4s; }
-.square:nth-child(6) { animation-delay: 5s; }
-.square:nth-child(7) { animation-delay: 6s; }
-.square:nth-child(8) { animation-delay: 7s; }
+.fsquare:nth-child(1) { animation-delay: 0s; }
+.fsquare:nth-child(2) { animation-delay: 1s; }
+.fsquare:nth-child(3) { animation-delay: 2s; }
+.fsquare:nth-child(4) { animation-delay: 3s; }
+.fsquare:nth-child(5) { animation-delay: 4s; }
+.fsquare:nth-child(6) { animation-delay: 5s; }
+.fsquare:nth-child(7) { animation-delay: 6s; }
+.fsquare:nth-child(8) { animation-delay: 7s; }
 
 /*Second Section Animation*/
 .ai-circle {

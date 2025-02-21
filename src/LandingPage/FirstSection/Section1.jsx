@@ -5,7 +5,7 @@ const LandingPage = () => {
   return (
       <div className="ad-challenges-container">
         <div className="solveHeader">
-          <h1 className="title">
+          <h1>
             <Typewriter
               words={["solves top digital advertising challenges"]}
               loop={1}
@@ -16,14 +16,14 @@ const LandingPage = () => {
           </h1>
 
           <div className="icon-grid">
-            <div className="square blue"></div>
-            <div className="square white"></div>
-            <div className="square neon"></div>
-            <div className="square gray"></div>
-            <div className="square blue"></div>
-            <div className="square white"></div>
-            <div className="square neon"></div>
-            <div className="square gray"></div>
+            <div className="fsquare blue"></div>
+            <div className="fsquare white"></div>
+            <div className="fsquare neon"></div>
+            <div className="fsquare gray"></div>
+            <div className="fsquare blue"></div>
+            <div className="fsquare white"></div>
+            <div className="fsquare neon"></div>
+            <div className="fsquare gray"></div>
           </div>
         </div>
 
