@@ -7,16 +7,14 @@ const Footer = () => {
   return (
     <footer className="footer">
       <div className="footer-left">
-      <div className="logo">
-          <img src={logo} alt="facebook" />
-        </div>
+      <img src={logo} alt="logo" className="logo"/>
         <div className="social-icons">
           <FaFacebookF />
           <FaTwitter />
           <FaLinkedinIn />
         </div>
         <div className="partners">
-          <img src={Partener} alt="facebook" />
+          <img src={Partener} alt="Partners" />
         </div>
       </div>
 
