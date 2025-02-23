@@ -6,6 +6,7 @@ import Signup from './Access Forms/Signup/Signup'
 import AboutUs from './About US/AboutUs'
 import ContactUs from './Contact Us/Contactus'
 import Pricing from './Pricing/Princing'
+import Vision from './Our Vision/OurVision'
 
 
 function App() {
@@ -18,8 +19,9 @@ function App() {
       <Login />
       <Signup/>
       <ContactUs />
-      */}
       <Pricing/>
+      */}
+      <Vision/>
 
     </div>
   )

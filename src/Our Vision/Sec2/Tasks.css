@@ -1,0 +1,135 @@
+/* Task Cards Section */
+.task-cards-section {
+  text-align: left;
+  background-color: #fff;
+  width: 100vw;
+  height: 110vh;
+  padding: 40px;
+}
+
+.task-cards-title {
+  font-size: 50px;
+  color: #394CFF;
+  width: 500px;
+  font-weight: bold;
+  line-height: 50px;
+  margin-top: 20px;
+}
+
+.task-cards-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 40px;
+
+}
+
+/* Task Card Base Styles */
+.task-card {
+  flex: 1;
+  max-width: 700px;
+  padding: 20px 60px;
+  color: white;
+  text-align: left;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.task-card-title {
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+  text-align: left;
+  color: #000;
+}
+
+.task-card-list {
+  list-style: none;
+  padding: 0;
+  line-height: 1rem;
+  width: 100px;
+  text-align: left;
+}
+
+.task-card-item {
+  font-size: 1.2rem;
+  margin: 0.5rem 0;
+}
+
+.task-card-description {
+  font-size: 1.1rem;
+  line-height: 1.5;
+  text-align: left;
+}
+
+/* Individual Task Cards */
+.task-card-human {
+  background-color: #00B4FF;
+  height: 300px;
+  width: 400px;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+.task-card-human-machine {
+  background-color: #394CFF;
+  height: 350px;
+}
+
+.task-card-machine {
+  background-color: #00B4FF;
+  height: 300px;
+  width: 400px;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Task Icons */
+.task-card-icon {
+  width: 50px;
+  height: 50px;
+  margin-bottom: 1rem;
+  align-items: left;
+}
+
+.task-card-icon-human-machine {
+  width: 130px;
+  height: 70px;
+  margin-bottom: 1rem;
+}
+
+/* Responsive */
+@media screen and (max-width: 768px) {
+  .task-cards-title {
+    font-size: 2rem;
+  }
+
+  .task-cards-container {
+    flex-direction: column;
+    padding: 20px;
+  }
+
+  .task-card {
+    width: 100%;
+    max-width: 90%;
+    padding: 20px;
+  }
+
+  .task-card-title {
+    font-size: 1.2rem;
+  }
+
+  .task-card-list {
+    width: 100%;
+  }
+
+  .task-card-item {
+    font-size: 1rem;
+  }
+
+  .task-card-description {
+    font-size: 1rem;
+  }
+}
