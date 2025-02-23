@@ -1,0 +1,189 @@
+/* Make the page full width */
+.contactus-container {
+  position: relative;
+  width: 100vw;
+  min-height: 100vh;
+  background: white;
+}
+
+.menu-icon span {
+  background-color: #3b50fc;
+}
+
+/* Make text black */
+.contactus-container h1,
+.contactus-container h2,
+.contactus-container h3,
+.contactus-container p,
+.contactus-container input,
+.contactus-container select {
+  color: black;
+}
+
+/* Logo Image */
+.contactus-logo-img {
+  width: 100px;
+  margin-left: 130px;;
+  margin-top: 10px;
+}
+
+
+/* Header */
+.contactus-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: left;
+  padding: 20px;
+  width: 100%;
+}
+
+
+.contactus-tm {
+  color: black;
+}
+
+/* Main Content */
+.contactus-content h2{
+  text-align: left;
+  font-size: 30px;
+  font-weight: bold;
+  padding: 10px;
+  margin-left: 150px;
+}
+
+/* Floating Squares */
+.contactus-floating-squares {
+  position: absolute;
+  top: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 15px;
+}
+
+.contactus-square {
+  position: relative;
+}
+
+.contactus-yellow {
+  background: #CEFF00;
+}
+
+.contactus-gray {
+  background: #d3d3d3;
+}
+
+.contactus-blue {
+  background: #3b50fc;
+}
+
+.contactus-dark-blue {
+  background: #00154f;
+}
+
+.contactus-small {
+  width: 13px;
+  height: 13px;
+  left: 150px;
+  bottom: 30px;
+}
+
+.contactus-small2 {
+  width: 40px;
+  height: 40px;
+  top: 90px;
+  z-index: 1000;
+  left: 90px;
+}
+
+.contactus-medium {
+  width: 50px;
+  height: 50px;
+  left: 120px;
+  bottom: 5px;
+}
+
+.contactus-medium2 {
+  width: 75px;
+  height: 75px;
+  left: 250px;
+  top: 20px;
+}
+
+.contactus-big {
+  width: 80px;
+  height: 100px;
+  margin-top: -100px;
+  left: 100px;
+}
+/* Contact Form */
+.contactus-form-container {
+  width: 100%;
+  max-width: 800px;
+  margin: 50px auto;
+  padding: 20px;
+}
+
+.contactus-form {
+  display: flex;
+  flex-direction: column;
+  margin: 30px;
+}
+
+.contactus-name-group {
+  display: flex;
+  gap: 10px;
+}
+
+.contactus-input {
+  width: 100%;
+  padding: 15px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background: white;
+  color: black;
+}
+
+/* Submit Button */
+.contactus-submit-btn {
+  background: #3b50fc;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  margin-top: 10px;
+}
+
+/* Partnership Information */
+.contactus-partnership {
+  margin-top: 20px;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  margin-left: 30px;
+}
+
+.contactus-partnership h3 {
+  font-weight: bold;
+}
+
+.contactus-partnership a {
+  color: #3b50fc;
+  text-decoration: none;
+}
+
+/* Bottom Bar */
+.contactus-bottom-bar {
+  width: 100%;
+  height: 50px;
+  background: #3b50fc;
+  margin-top: 40px;
+}
+
+.contactus-bar {
+  width: 30px;
+  height: 3px;
+  background: black;
+  margin: 5px 0;
+}

@@ -11,7 +11,7 @@ body{
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  padding: 10px 20px;
+  padding: 0px 20px;
   z-index: 1;
 }
 
@@ -19,11 +19,11 @@ body{
   background-color: #3d4dff;
   color: white;
   border: none;
-  padding: 10px 20px;
+  padding: 13px 20px;
   font-size: 14px;
   font-weight: bold;
   cursor: pointer;
-  border-radius: 5px;
+  border-radius: 0px;
   margin-right: 20px;
 }
 
@@ -37,8 +37,9 @@ body{
 .menu-icon span {
   width: 25px;
   height: 3px;
-  background-color: white;
+  background-color: #fff;
   display: block;
+  border-radius: 8px;
 }
 
 /* Sidebar */

@@ -1,25 +1,23 @@
 /* eslint-disable no-unused-vars */
 import React from 'react'
-import Navigation from './Navigation/NavigationBar'
 import Home from './LandingPage/Home'
-import Footer from './Footer/Footer'
 import Login from './Access Forms/Login/Login'
 import Signup from './Access Forms/Signup/Signup'
 import AboutUs from './About US/AboutUs'
+import ContactUs from './Contact Us/Contactus'
+
+
 function App() {
 
   return (
     <div>
-
       {/*
-        <Navigation />
       <Home />
-      <Footer />
+      <AboutUs />
       <Login />
       <Signup/>
       */}
-      <AboutUs />
-
+      <ContactUs />
     </div>
   )
 }

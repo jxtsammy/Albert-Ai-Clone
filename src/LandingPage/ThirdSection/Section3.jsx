@@ -27,10 +27,12 @@ const ResultsSection = () => {
       <div className='title-container'>
         <h2 className="primary-heading">
           <Typewriter
-                words={["operates in your paid search, social, programmatic accounts"]}
-                loop={1}
-                typeSpeed={150}
-                deleteSpeed={150}
+                words={["operates in your paid search, social, programmatic accounts",
+                  "always here to be of help to our customers, for you are our priority"
+                ]}
+                loop={'true'}
+                typeSpeed={80}
+                deleteSpeed={100}
                 delaySpeed={1500}
               />
         </h2>

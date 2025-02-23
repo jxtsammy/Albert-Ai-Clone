@@ -51,8 +51,8 @@ const NavigationBar = () => {
             <input type="text" placeholder="Search ..." />
             <button>🔍</button>
           </div>
-          <p>FAQs</p>
-          <p>Privacy Policy</p>
+          <p className="FAQs">FAQs</p>
+          <p className="PP">Privacy Policy</p>
         </div>
       )}
     </div>
