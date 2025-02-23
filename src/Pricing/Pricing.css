@@ -13,10 +13,13 @@
   padding: 35px 150px;
   display: flex;
   align-items: center;
+  justify-content: space-between; /* Keeps logo on left */
 }
 
+/* Ensure the logo is aligned left */
 .pricing-logo {
-  height: 35px; /* Adjust based on your logo */
+  height: 35px;
+  margin-right: auto; /* Pushes everything else to the right */
 }
 
 /* Hero Section */
@@ -32,17 +35,18 @@
   font-size: 50px;
   margin-top: 20px;
   color: white;
-  width: 700px;
+  max-width: 700px;
   font-weight: bolder;
 }
 
 /* Content Container */
 .pricing-content-container {
   display: flex;
-  flex: 1; /* Takes remaining space */
+  flex: 1;
   align-items: flex-start;
   padding: 50px;
-  font-family: 'Courier New', Courier, monospace;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  gap: 30px;
 }
 
 /* Left Side - Text Content */
@@ -54,12 +58,14 @@
   color: #000;
 }
 
-/* Right Side - Request Form */
+/* Right Side - Form */
 .pricing-request-form-section {
   display: flex;
   justify-content: flex-end;
+  flex: 1;
 }
 
+/* Form Container */
 .pricing-form-container {
   width: 480px;
   background: white;
@@ -67,17 +73,8 @@
   border-radius: 10px;
   border: 6px solid #ccc;
   bottom: 150px;
+  left: 20px;
   position: relative;
-  left: 110px;
-}
-
-.pricing-form-container h2 {
-  text-align: center;
-  margin-bottom: 30px;
-  color: #000;
-  font-size: 36px;
-  font-weight: lighter;
-  font-family: 'Courier New', Courier, monospace;
 }
 
 /* Form Styling */
@@ -98,14 +95,16 @@
   font-size: 1rem;
   background-color: #fff;
   font-family: 'Courier New', Courier, monospace;
-}
-
-.pricing-form-group select{
   color: #000;
 }
 
-.pricing-form-group input{
+.pricing-form-container h2 {
+  text-align: center;
+  margin-bottom: 30px;
   color: #000;
+  font-size: 36px;
+  font-weight: lighter;
+  font-family: 'Courier New', Courier, monospace;
 }
 
 /* Button */
@@ -123,4 +122,143 @@ button {
 
 button:hover {
   background: #1e30c1;
+}
+
+/* ========================== */
+/* RESPONSIVE DESIGN SECTION */
+/* ========================== */
+
+/* Tablets (max-width: 1024px) */
+@media screen and (max-width: 1024px) {
+  .pricing-header {
+    padding: 30px 80px;
+  }
+
+  .pricing-hero-section h1 {
+    font-size: 40px;
+    width: 90%;
+    margin: 0 auto;
+  }
+
+  /* Stack content and form */
+  .pricing-content-container {
+    flex-direction: column;
+    align-items: center;
+    text-align: left;
+    padding: 30px;
+    gap: 200px;
+  }
+
+  .pricing-text-content {
+    max-width: 90%;
+  }
+
+  .pricing-request-form-section {
+    justify-content: center;
+    width: 100%;
+    order: 2;
+  }
+
+  .pricing-form-container h2 {
+  color: #000;
+}
+
+  .pricing-form-container {
+    width: 90%;
+    max-width: 500px;
+  }
+}
+
+/* Mobile Devices (max-width: 768px) */
+@media screen and (max-width: 768px) {
+  .pricing-header {
+    padding: 20px 40px;
+    flex-direction: row;
+    justify-content: flex-start; /* Logo stays on the left */
+  }
+
+  .pricing-logo {
+    height: 30px;
+  }
+
+  .pricing-hero-section {
+    height: auto;
+    padding: 30px;
+  }
+
+  .pricing-hero-section h1 {
+    font-size: 35px;
+    width: 100%;
+  }
+
+  /* Stack content with form below */
+  .pricing-content-container {
+    flex-direction: column;
+    padding: 30px;
+    gap: 170px;
+  }
+
+  .pricing-text-content {
+    max-width: 100%;
+  }
+
+  /* Move form below content */
+  .pricing-request-form-section {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    order: 2; /* Push form below content */
+  }
+
+  .pricing-form-container {
+    width: 100%;
+    max-width: 600px;
+    padding: 10px;
+    position: relative;
+    margin-right: 20px;
+  }
+
+  .pricing-form-container h2 {
+    font-size: 28px;
+    color: #000;
+  }
+}
+
+/* Small Mobile Devices (max-width: 480px) */
+@media screen and (max-width: 480px) {
+  .pricing-header {
+    padding: 15px;
+  }
+
+  .pricing-hero-section {
+    padding: 20px;
+  }
+
+  .pricing-hero-section h1 {
+    font-size: 30px;
+    width: 100%;
+  }
+
+  .pricing-content-container {
+    padding: 5px;
+  }
+
+  .pricing-form-container h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #000;
+  font-size: 36px;
+  font-weight: lighter;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+  .pricing-form-container {
+    width: 100%;
+    max-width: 320px;
+    padding: 10px;
+  }
+
+  .pricing-form-container h2 {
+    font-size: 24px;
+  }
 }
