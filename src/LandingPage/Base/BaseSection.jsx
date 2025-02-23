@@ -25,14 +25,14 @@ const Hero = () => {
 
           {/* Floating Squares */}
           <div className="hero-floating-squares">
-            {[...Array(100)].map((_, i) => (
+            {[...Array(150)].map((_, i) => (
               <div key={i} className="hero-square"></div>
             ))}
           </div>
         </div>
 
         {/* Learn More Button */}
-        <button className="hero-learn-more">LEARN MORE →</button>
+        <button className="my-more">LEARN MORE →</button>
       </div>
     </div>
   );
