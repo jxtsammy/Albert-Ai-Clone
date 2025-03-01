@@ -41,6 +41,7 @@ body{
   border-radius: 8px;
 }
 
+
 /* Sidebar */
 .sidebar {
   position: fixed;
@@ -73,6 +74,7 @@ body{
 .sidebar ul {
   list-style: none;
   padding: 0;
+  color: white;
 }
 
 .sidebar ul li {
@@ -83,7 +85,12 @@ body{
   font-weight: bold;
 }
 
-.sidebar ul li:hover {
+ul li a {
+  text-decoration: none;  /* Removes underline */
+  color: inherit;         /* Keeps the original text color */
+}
+
+.sidebar ul li a:hover {
   color: greenyellow;
 }
 

@@ -50,7 +50,7 @@
   text-decoration: underline;
 }
 
-.cta-button {
+.about-button {
   background-color: blue;
   color: white;
   border: none;
@@ -58,6 +58,7 @@
   font-size: 14px;
   border-radius: 0;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  width: 200px;
 }
 
 .colored-box {
@@ -100,7 +101,7 @@
   width: 650px;
   height: 390px;
   background-color: #DCDCDC;
-  top: 39%;
+  top: 38%;
   left: 0;
 }
 
@@ -111,11 +112,11 @@
   flex-direction: column;
   background-color: #fff;
   padding: 40px;
+  justify-content: center;
 }
 
 /* Careers Section */
 .careers-section {
-  margin-bottom: 60px;
   width: 50%;
   padding: 40px;
   z-index: 1;

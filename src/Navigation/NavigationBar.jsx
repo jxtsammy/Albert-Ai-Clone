@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { Link } from 'react-router-dom';
 import "./NavStyles.css";
 
 const NavigationBar = () => {
@@ -38,14 +39,15 @@ const NavigationBar = () => {
         <div ref={sidebarRef} className={`sidebar ${isOpen ? "open" : ""}`}>
           <button className="close-btn" onClick={() => setIsOpen(false)}>✕</button>
           <ul>
-            <li>Our Vision</li>
-            <li>Impact</li>
-            <li>Product</li>
-            <li>Resources</li>
-            <li>About Us</li>
-            <li>Pricing</li>
-            <li>Client Login</li>
-            <li>Contact Us</li>
+            <li><Link to="/">Home</Link></li>
+            <li><Link to="/vision">Our Vision</Link></li>
+            <li><Link to="/impact">Impact</Link></li>
+            <li><Link to="/product">Product</Link></li>
+            <li><Link to="/resources">Resources</Link></li>
+            <li><Link to="/about-us">About Us</Link></li>
+            <li><Link to="/pricing">Pricing</Link></li>
+            <li><Link to="/login">Client Login</Link></li>
+            <li><Link to="/contact-us">Contact Us</Link></li>
           </ul>
           <div className="search-container">
             <input type="text" placeholder="Search ..." />

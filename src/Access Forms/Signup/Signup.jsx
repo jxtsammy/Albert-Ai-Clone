@@ -3,6 +3,7 @@ import "./Signup.css";
 import { Typewriter } from "react-simple-typewriter";
 import logo from "../../assets/albertzoomd-logo_01-02-2.png"; // Your logo path
 import { FaEye, FaEyeSlash } from "react-icons/fa"; // Eye icons for password toggle
+import { Link } from 'react-router-dom';
 
 const SignUp = () => {
   const [name, setName] = useState("");
@@ -43,7 +44,7 @@ const SignUp = () => {
           />
         </h1>
         <p>
-          Already have an account? <a href="#" className="login-link">Login</a>
+          Already have an account? <Link to="/login">Login</Link>
         </p>
       </div>
 

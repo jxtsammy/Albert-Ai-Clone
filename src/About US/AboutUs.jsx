@@ -17,7 +17,7 @@ const AboutUs = () => {
           Albert.ai was acquired by Zoomd Technologies in 2022. <br />
           For the <a href="#" className="link">full announcement</a> visit Zoomd website.
         </p>
-        <button className="cta-button">SEE ZOOMD LEADING TEAM</button>
+        <button className="about-button">SEE ZOOMD LEADING TEAM</button>
         </div>
         <div className="colored-box yellow-large"></div>
         <div className="colored-box blue-small"></div>

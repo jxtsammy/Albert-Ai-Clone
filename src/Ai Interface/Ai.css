@@ -1,0 +1,418 @@
+/* Base Styles */
+.albert-container {
+  display: flex;
+  height: 100vh;
+  background-color: #1e1e1e;
+  color: white;
+  font-family: Arial, sans-serif;
+  width: 100vw;
+}
+
+.albert-sidebar {
+  width: 80px;
+  background-color: #121212;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 0;
+  justify-content: space-between;
+  z-index: 1;
+}
+
+.albert-sidebar-menu-icon {
+  cursor: pointer;
+  color: white;
+  margin-bottom: 30px;
+}
+
+.albert-sidebar-menu-icon:hover{
+  color: #1c32b4;
+}
+
+.albert-sidebar-icons {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  color: white;
+}
+
+.albert-profile-section {
+  margin-top: auto;
+  padding-bottom: 20px;
+}
+
+.albert-profile-icon {
+  color: white;
+  width: 30px;
+  height: 30px;
+}
+
+.profile-menu {
+  position: absolute;
+  bottom: 50px;
+  left: 30px;
+  background: #333 ;
+  color: white;
+  border-radius: 15px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  padding: 10px;
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border-bottom-left-radius: 0px;
+  z-index: 999;
+}
+
+.profile-menu p {
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.profile-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  border-radius: 5px;
+}
+
+.profile-menu-item:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.albert-profile-section {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.albert-profile-icon {
+  width: 32px;
+  height: 32px;
+  color: white;
+}
+
+
+
+.albert-main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.albert-chat-box {
+  width: 60%;
+  height: 400px;
+  overflow-y: auto;
+  background: #222;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 130px;
+  z-index: 1;
+}
+
+/* Scroll to Bottom Button */
+.scroll-to-bottom {
+  position: absolute;
+  top: 240px;
+  right: 170px;
+  background: #2d44f0;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  padding: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: opacity 0.3s ease-in-out;
+}
+
+.scroll-to-bottom:hover {
+  background: #1c32b4;
+}
+
+.chat-message {
+  word-wrap: break-word; /* Breaks long words */
+  white-space: pre-wrap; /* Preserves new lines */
+  padding: 10px;
+  border-radius: 8px;
+    max-width: 100%;
+}
+
+.chat-message.user {
+  background-color: #2d44f0;
+  align-self: flex-end;
+  max-width: 300px;
+  text-align: left;
+}
+
+.chat-message.ai {
+  background-color: #555;
+  align-self: flex-start;
+  max-width: 400px;
+  text-align: left;
+}
+
+.albert-message-box {
+  background: #333;
+  padding: 20px;
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 50%; /* Default width */
+  transition: width 0.3s ease-in-out; /* Smooth transition effect */
+  z-index: 1;
+  height: auto;
+}
+
+.albert-message-box.expanded {
+  width: 60%;
+  position: absolute;
+  bottom: 30px; /* Move it to the bottom */
+}
+
+
+.inputs {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.albert-textarea {
+  flex: 1;
+  padding: 10px;
+  background: transparent;
+  border: none;
+  color: white;
+  outline: none;
+  resize: none;
+  height: auto;
+  max-height: auto;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+}
+
+.albert-buttons {
+  display: flex;
+  width: 100%;
+  gap: 10px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  margin-top: 10px;
+}
+
+.albert-attachment-icon {
+  color: white;
+  cursor: pointer;
+}
+
+.albert-send-icon {
+  width: 30px;
+  height: 30px;
+  font-size: 12px;
+  border-radius: 60%;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+/* Message Preview Inside Message Box */
+.message-preview-container {
+  display: flex;
+  align-items: flex-start;
+  position: relative;
+  margin-right: 10px;
+  z-index: 1;
+}
+
+.message-preview {
+  width: 40px;
+  height: 50px;
+  border-radius: 5px;
+  object-fit: cover;
+}
+
+.remove-image {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: red;
+  border-radius: 50%;
+  padding: 2px;
+  color: white;
+  cursor: pointer;
+  font-size: 10px;
+}
+
+/* Upload Progress Bar */
+.upload-progress {
+  width: 100%;
+  height: 5px;
+  background: #ccc;
+  border-radius: 5px;
+  margin-bottom: 5px;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 5px;
+  background: #2d44f0;
+  transition: width 0.2s ease;
+}
+
+
+/* Sent Image */
+.sent-image {
+  max-width: 100%;
+  max-height: 300px;
+  border-radius: 8px;
+}
+
+
+.albert-deepthink-btn,
+.albert-search-btn {
+  background: #555;
+  border: none;
+  color: white;
+  border-radius: 20px;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  height: 28px;
+  font-size: 16px;
+}
+
+.albert-deepthink-btn:hover,
+.albert-search-btn:hover {
+  background: #777;
+}
+
+.floating-squares-container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.floating-square {
+  position: absolute;
+  bottom: -50px;
+  width: 20px;
+  height: 20px;
+  background: red;
+  opacity: 0.8;
+  animation: floatUp 5s linear infinite;
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(0);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(-100vh);
+    opacity: 0;
+  }
+}
+
+/* Random Positions & Colors */
+.floating-square:nth-child(1) { left: 10%; animation-duration: 4s; background: #ff6b6b; }
+.floating-square:nth-child(2) { left: 20%; animation-duration: 5s; background: #6bcbff; }
+.floating-square:nth-child(3) { left: 30%; animation-duration: 6s; background: #ffb86b; }
+.floating-square:nth-child(4) { left: 40%; animation-duration: 4.5s; background: #d36bff; }
+.floating-square:nth-child(5) { left: 50%; animation-duration: 5.5s; background: #6bff88; }
+.floating-square:nth-child(6) { left: 60%; animation-duration: 6.5s; background: #ff6be5; }
+.floating-square:nth-child(7) { left: 70%; animation-duration: 4.2s; background: #6bffff; }
+.floating-square:nth-child(8) { left: 80%; animation-duration: 5.8s; background: #ffde6b; }
+.floating-square:nth-child(9) { left: 90%; animation-duration: 6.3s; background: #b06bff; }
+.floating-square:nth-child(10) { left: 70%; animation-duration: 4.8s; background: #ff6b94; }
+.floating-square:nth-child(11) { left: 7%; animation-duration: 5.2s; background: #ff8b8b; }
+.floating-square:nth-child(12) { left: 18%; animation-duration: 4.6s; background: #8bcfff; }
+.floating-square:nth-child(13) { left: 28%; animation-duration: 5.9s; background: #ffc98b; }
+.floating-square:nth-child(14) { left: 38%; animation-duration: 4.4s; background: #e08bff; }
+.floating-square:nth-child(15) { left: 48%; animation-duration: 5.7s; background: #8bffac; }
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .albert-sidebar {
+    width: 60px; /* Reduce sidebar width */
+    padding: 10px 0;
+  }
+
+  .albert-sidebar-icons {
+    gap: 20px; /* Reduce gap between icons */
+  }
+
+  .albert-chat-box {
+    width: 90%; /* Make chat box wider on smaller screens */
+    max-height: 50vh; /* Adjust max height */
+  }
+
+  .albert-message-box {
+    width: 80%; /* Make message box wider on smaller screens */
+    padding: 15px; /* Reduce padding */
+  }
+
+  .albert-textarea {
+    font-size: 14px; /* Reduce font size for smaller screens */
+  }
+
+  .albert-buttons {
+    flex-direction: row; /* Stack buttons vertically */
+    gap: 50px;
+  }
+}
+
+@media (max-width: 480px) {
+  .albert-sidebar {
+    width: 50px; /* Further reduce sidebar width */
+  }
+
+  .albert-sidebar-menu-icon {
+    margin-bottom: 20px; /* Reduce margin */
+  }
+
+  .albert-sidebar-icons {
+    gap: 15px; /* Further reduce gap between icons */
+  }
+
+  .albert-chat-box {
+    width: 95%; /* Make chat box almost full width */
+    max-height: 60vh; /* Adjust max height */
+  }
+
+  .albert-message-box {
+    width: 70%; /* Make message box almost full width */
+    padding: 10px; /* Further reduce padding */
+  }
+
+  .albert-textarea {
+    font-size: 12px; /* Further reduce font size */
+  }
+
+  .albert-deepthink-btn,
+  .albert-search-btn {
+    font-size: 14px; /* Reduce button font size */
+    height: 24px; /* Reduce button height */
+  }
+}

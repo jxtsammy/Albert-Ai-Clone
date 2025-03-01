@@ -1,4 +1,5 @@
 import "./FStyle.css";
+import { Link } from 'react-router-dom';
 import { FaFacebookF, FaTwitter, FaLinkedinIn } from "react-icons/fa";
 import Partener from "../assets/facebookp.svg"
 import logo from "../assets/albertzoomd-logo_01-02-2.png"
@@ -22,12 +23,14 @@ const Footer = () => {
 
       <div className="footer-center">
         <ul>
-          <li>Our Vision</li>
-          <li>Impact</li>
-          <li>Product</li>
-          <li>About Us</li>
-          <li>Resources</li>
-          <li>Contact Us</li>
+          <li><Link to="/vision">Our Vision</Link></li>
+            <li><Link to="/impact">Impact</Link></li>
+            <li><Link to="/product">Product</Link></li>
+            <li><Link to="/resources">Resources</Link></li>
+            <li><Link to="/about-us">About Us</Link></li>
+            <li><Link to="/pricing">Pricing</Link></li>
+            <li><Link to="/login">Client Login</Link></li>
+            <li><Link to="/contact-us">Contact Us</Link></li>
         </ul>
       </div>
 

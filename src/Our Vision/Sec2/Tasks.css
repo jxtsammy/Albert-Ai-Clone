@@ -3,7 +3,7 @@
   text-align: left;
   background-color: #fff;
   width: 100vw;
-  height: 110vh;
+  height: auto;
   padding: 40px;
 }
 
@@ -115,6 +115,7 @@
     width: 100%;
     max-width: 90%;
     padding: 20px;
+    margin-bottom: 30px;
   }
 
   .task-card-title {

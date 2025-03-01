@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./Login.css";
+import { Link } from 'react-router-dom';
 import logo from "../../assets/albertzoomd-logo_01-02-2.png";
 
 const Login = () => {
@@ -9,7 +10,7 @@ const Login = () => {
   return (
     <div className="login-container">
       <div className="login-box">
-        <img src={logo} alt="logo" className="logo" />
+        <img src={logo} alt="logo" className="login-logo" />
         <input type="email" placeholder="Your email" className="input-field" required/>
         <input
           type={showPassword ? "text" : "password"}
@@ -20,7 +21,7 @@ const Login = () => {
           required
         />
           <a href="#" className="forgot-password">Forgot your password?</a>
-        <button className="login-button" type="submit">Loin</button>
+        <button className="login-button" type="submit">Login</button>
         <div className="checkbox-container">
           <label className="checkbox-label">
           <input
@@ -37,9 +38,9 @@ const Login = () => {
         </div>
       </div>
       <div className="login-footer">
-        <p>Dont have an account?</p>
-        <a href="#" className="flink">Register</a>
+        <p>Dont have an account? <Link to="/signup">Register</Link></p>
       </div>
+
       <div className="floating-squares">
         {[...Array(30)].map((_, i) => (
           <div key={i} className={`square square-${i}`} />
