@@ -45,10 +45,14 @@
   margin-left: 250px;
 }
 
+button{
+  background-color: transparent;
+}
+
 .login-button {
   background-color: #3b4dff;
   color: white;
-  padding:20px;
+  padding:25px;
   border: none;
   border-radius: 0px;
   cursor: pointer;

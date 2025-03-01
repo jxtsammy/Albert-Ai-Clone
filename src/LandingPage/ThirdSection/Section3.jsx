@@ -37,14 +37,14 @@ const ResultsSection = () => {
               />
         </h2>
 
-        <div className="floating-animation">
-          <div className="floatin-square  s1"></div>
-          <div className="floatin-square  s2"></div>
-          <div className="floatin-square  s3"></div>
-          <div className="floatin-square  s4"></div>
-          <div className="floatin-square  s5"></div>
-          <div className="floatin-square  s6"></div>
-          <div className="floatin-square  s7"></div>
+        <div className="S3-floating-animation">
+          <div className="S3-floatin-square  s1"></div>
+          <div className="S3-floatin-square  s2"></div>
+          <div className="S3-floatin-square  s3"></div>
+          <div className="S3-floatin-square  s4"></div>
+          <div className="S3-floatin-square  s5"></div>
+          <div className="S3-floatin-square  s6"></div>
+          <div className="S3-floatin-square  s7"></div>
         </div>
       </div>
 

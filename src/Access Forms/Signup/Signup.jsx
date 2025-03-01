@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./Signup.css";
 import { Typewriter } from "react-simple-typewriter";
 import logo from "../../assets/albertzoomd-logo_01-02-2.png"; // Your logo path
@@ -13,6 +14,7 @@ const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   // Handle form submission
   const handleSubmit = (e) => {
@@ -27,6 +29,10 @@ const SignUp = () => {
     }
     setError("");
     alert("Sign-up successful!"); // Replace with actual signup logic
+  };
+
+  const handleRegister = () => {
+    navigate("/Albert.ai"); // Redirect to Albert.ai page
   };
 
   return (
@@ -114,7 +120,7 @@ const SignUp = () => {
           {error && <p className="error-message">{error}</p>}
 
           {/* Sign Up Button */}
-          <button type="submit" className="signup-button">Sign Up</button>
+          <button type="submit" className="signup-button" onClick={handleRegister}>Sign Up</button>
         </form>
       </div>
       <div className="floating-square">

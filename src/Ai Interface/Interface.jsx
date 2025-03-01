@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { MessageSquarePlus, Smartphone, Menu, Paperclip, ArrowUp, ArrowDown, Atom, Globe, User, X, Settings, Trash2, Mail, LogOut } from "lucide-react";
+import { MessageSquarePlus, History, Menu, Paperclip, ArrowUp, ArrowDown, Atom, Globe, User, X, Settings, Trash2, Mail, LogOut,} from "lucide-react";
 import "./Ai.css";
 
 const Albert = () => {
@@ -11,6 +11,13 @@ const Albert = () => {
   const [uploadProgress, setUploadProgress] = useState({});
   const chatBoxRef = useRef(null);
   const fileInputRef = useRef(null);
+  const [name, setName] = useState("Samuel Sallo");
+  const [email, setEmail] = useState("rober****mes001@gmail.com");
+  const [phone, setPhone] = useState("");
+  const [edited, setEdited] = useState(false);
+  const [chatHistory, setChatHistory] = useState([]);
+  const [showHistory, setShowHistory] = useState(false);
+  const [activeChat, setActiveChat] = useState(null);
 
   const handleSendMessage = () => {
     if (message.trim() === "" && imagePreviews.length === 0) return;
@@ -23,22 +30,49 @@ const Albert = () => {
       newMessages.push({ sender: "user", images: [...imagePreviews] });
     }
 
-    setChat([...chat, ...newMessages, { sender: "ai", text: "This is a dummy AI response." }]);
+    const updatedChat = [...chat, ...newMessages, { sender: "ai", text: "This is a dummy AI response." }];
+    setChat(updatedChat);
     setMessage("");
     setImagePreviews([]);
     setMessageSent(true);
+
+    // ✅ Update chat history instead of adding a new entry
+    if (activeChat) {
+      // Find and update the existing chat
+      const updatedHistory = chatHistory.map((chatItem) =>
+        chatItem.id === activeChat.id ? { ...chatItem, messages: updatedChat } : chatItem
+      );
+      setChatHistory(updatedHistory);
+      setActiveChat({ ...activeChat, messages: updatedChat });
+    } else {
+      // ✅ Create a new chat if it's a fresh conversation
+      const newChat = { id: Date.now(), title: updatedChat[0].text || "New Chat", messages: updatedChat };
+      setChatHistory([...chatHistory, newChat]);
+      setActiveChat(newChat);
+    }
 
     setTimeout(() => {
       scrollToBottom();
     }, 100);
   };
 
+
   const handleNewChat = () => {
+    if (chat.length > 0) {
+      // ✅ Only save the chat if it wasn't already in history
+      if (!activeChat) {
+        const chatTitle = chat[0].text || "Untitled Chat";
+        setChatHistory([...chatHistory, { id: Date.now(), title: chatTitle, messages: chat }]);
+      }
+    }
+
     setChat([]);
     setMessage("");
     setImagePreviews([]);
     setMessageSent(false);
+    setActiveChat(null); // ✅ Reset active chat when starting a new one
   };
+
 
   const handleKeyDown = (e) => {
     if (e.key === "Enter" && !e.shiftKey) {
@@ -131,6 +165,37 @@ const Albert = () => {
     return () => document.removeEventListener("mousedown", closeProfileMenu);
   }, []);
 
+  const [showSettings, setShowSettings] = useState(false);
+
+  const toggleSettings = () => {
+    setShowSettings(!showSettings);
+    setShowProfileMenu(false); // Close profile menu when opening settings
+  };
+
+  const handleSave = () => {
+    const maskedEmail =email.replace(/(.{5})(.{3})(@.*)/, "$1***$3");
+    setEmail(maskedEmail);
+    setEdited(false);
+  };
+
+  const deleteChat = (index) => {
+    const updatedHistory = chatHistory.filter((_, i) => i !== index);
+    setChatHistory(updatedHistory);
+  };
+
+  const clearHistory = () => {
+    setChatHistory([]);
+  };
+
+  const loadChat = (chatItem) => {
+    setActiveChat(chatItem);  // ✅ Track which chat is active
+    setChat(chatItem.messages);
+    setMessageSent(true);
+    setShowHistory(false);
+  };
+
+
+
 
   return (
     <div className="albert-container">
@@ -139,42 +204,135 @@ const Albert = () => {
         <Menu className="albert-sidebar-menu-icon" />
         <div className="albert-sidebar-icons">
           <MessageSquarePlus onClick={handleNewChat} style={{ cursor: "pointer" }} />
-          <Smartphone />
+          <History onClick={() => setShowHistory(true)} style={{ cursor: "pointer" }} />
         </div>
         <div className="albert-profile-section" ref={profileRef}>
           <User className="albert-profile-icon" onClick={toggleProfileMenu} />
           {showProfileMenu && (
             <div className="profile-menu">
-              <p>Samuel Sallo</p>
-              <div className="profile-menu-item"><Settings /> Settings</div>
+              <p>{name}</p>
+              <div className="profile-menu-item"  onClick={toggleSettings}><Settings /> Settings</div>
               <div className="profile-menu-item"><Trash2 /> Delete all chats</div>
               <div className="profile-menu-item"><Mail /> Contact us</div>
               <div className="profile-menu-item"><LogOut /> Log out</div>
             </div>
           )}
         </div>
+
+       {/* Settings Modal */}
+        {showSettings && (
+          <div className="settings-modal">
+            <div className="settings-content">
+            <div className="settings-header">
+              <h2>Settings</h2>
+              <div className="btGroup">
+                <button className={`save-settings ${edited ? 'active' : ''}`} onClick={edited ? handleSave : null}>Save</button>
+                <X className="close-settings" onClick={toggleSettings} />
+              </div>
+            </div>
+
+              <div className="settings-tabs">
+                <p className="tab active">Profile</p>
+              </div>
+
+              <div className="settings-body">
+              <div className="settings-item">
+                <span>Name</span>
+                <input
+                  type="text"
+                  value={name}
+                  onChange={(e) => { setName(e.target.value); setEdited(true); }}
+                />
+              </div>
+              <div className="settings-item">
+                <span>Email address</span>
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => { setEmail(e.target.value); setEdited(true); }}
+                />
+              </div>
+              <div className="settings-item">
+                <span>Phone number</span>
+                <input
+                  type="text"
+                  value={phone}
+                  onChange={(e) => { setPhone(e.target.value); setEdited(true); }}
+                />
+              </div>
+                <div className="settings-item">
+                  <span>Terms of Use</span>
+                  <span className="view-link">View</span>
+                </div>
+                <div className="settings-item">
+                  <span>Privacy Policy</span>
+                  <span className="view-link">View</span>
+                </div>
+                <div className="settings-item delete-section">
+                  <span>Delete account</span>
+                  <button className="Al-delete-button">Delete</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
+
+      {/* Chat History Modal */}
+      {showHistory && (
+        <div className="history-modal">
+          <div className="history-content">
+            <div className="history-header">
+              <h2>Chat History</h2>
+              <X className="close-history" onClick={() => setShowHistory(false)} />
+            </div>
+            {/* Scrollable Chat List */}
+            <div className="history-body">
+              {chatHistory.length === 0 ? (
+                <p className="no-history">No previous chats</p>
+              ) : (
+                chatHistory.map((chatItem) => (
+                  <div
+                    key={chatItem.id}
+                    className="history-item"
+                    onClick={() => loadChat(chatItem)}
+                  >
+                    <p>{chatItem.title}</p>
+                    <Trash2 className="delete-chat" onClick={(e) => deleteChat(e, chatItem.id)} />
+                  </div>
+                ))
+              )}
+            </div>
+            {chatHistory.length > 0 && (
+              <button className="clear-history" onClick={clearHistory}>Clear History</button>
+            )}
+          </div>
+        </div>
+      )}
 
       {/* Main Content */}
       <div className="albert-main-content">
         {!messageSent && chat.length === 0 && (
           <>
-            <h1>Hi, I&apos;m Albert.</h1>
-            <p>How can I help you today?</p>
+            <h1 className="AlHeader">Hi, I&apos;m Albert.</h1>
+            <p className="AlAsk">How can I help you today?</p>
           </>
         )}
 
         {/* Chat Box */}
         {messageSent && (
           <div className="albert-chat-box" ref={chatBoxRef} onScroll={handleScroll}>
-            {chat.map((msg, index) => (
-              <div key={index} className={`chat-message ${msg.sender}`}>
-                {msg.text && <p>{msg.text}</p>}
-                {msg.images &&
-                  msg.images.map((img, i) => <img key={i} src={img} alt="Uploaded" className="sent-image" />)}
-              </div>
-            ))}
-          </div>
+          {(activeChat ? activeChat.messages : chat).map((msg, index) => (
+            <div key={index} className={`chat-message ${msg.sender}`}>
+              {msg.text && <p>{msg.text}</p>}
+              {msg.images &&
+                msg.images.map((img, i) => (
+                  <img key={i} src={img} alt="Uploaded" className="sent-image" />
+                ))}
+            </div>
+          ))}
+        </div>
+
         )}
 
         {/* Scroll to Bottom Button */}
@@ -241,9 +399,9 @@ const Albert = () => {
           </div>
         </div>
       </div>
-      <div className="floating-squares-container">
+      <div className="Al-floating-squares-container">
         {[...Array(20)].map((_, index) => (
-          <div key={index} className="floating-square"></div>
+          <div key={index} className="Al-floating-square"></div>
         ))}
       </div>
     </div>

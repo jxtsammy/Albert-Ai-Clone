@@ -4,8 +4,7 @@ Albert by CodeX (TSXV:ZOMD) is a cloud-based artificial intelligence platform th
 
 ## About Albert.ai Clone
 
-Albert.ai was acquired by CodeX Technologies in 2022.
-For the full announcement, visit the CodeX website.
+Albert.ai Clone was created by CodeX Technologies in 2025.
 
 ## Features
 

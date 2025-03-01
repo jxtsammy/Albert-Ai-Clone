@@ -26,7 +26,7 @@ const NavigationBar = () => {
     <div>
       {/* Navbar */}
       <div className="navbar">
-        <button className="client-login">CLIENT LOGIN</button>
+        <Link to="/login"><button className="client-login">CLIENT LOGIN</button></Link>
         <div className="menu-icon" onClick={() => setIsOpen(true)}>
           <span></span>
           <span></span>

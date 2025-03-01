@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./Login.css";
 import { Link } from 'react-router-dom';
 import logo from "../../assets/albertzoomd-logo_01-02-2.png";
@@ -6,6 +7,11 @@ import logo from "../../assets/albertzoomd-logo_01-02-2.png";
 const Login = () => {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
+
+  const handleLogin = () =>{
+    navigate("/Albert.ai");
+  }
 
   return (
     <div className="login-container">
@@ -21,7 +27,7 @@ const Login = () => {
           required
         />
           <a href="#" className="forgot-password">Forgot your password?</a>
-        <button className="login-button" type="submit">Login</button>
+        <button  type="submit" onClick={handleLogin}>Login</button>
         <div className="checkbox-container">
           <label className="checkbox-label">
           <input
