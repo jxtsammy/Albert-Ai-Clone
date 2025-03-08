@@ -1,4 +1,3 @@
-import React from "react";
 import "./Contact.css";
 import logo from "../assets/albertzoomd-logo_01-01.png";
 import NavigationBar from "../Navigation/NavigationBar";

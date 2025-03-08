@@ -530,6 +530,7 @@ html{
   color: #ff4d4d;
   cursor: pointer;
   transition: color 0.2s;
+  z-index: 1;
 }
 
 .delete-chat:hover {
@@ -538,7 +539,8 @@ html{
 
 /* Clear History Button */
 .clear-history {
-  width: 100%;
+  width: 50%;
+  display: flex;
   background: #ff4d4d;
   color: white;
   border: none;
@@ -548,7 +550,10 @@ html{
   border-radius: 5px;
   margin-top: 10px;
   transition: background 0.2s;
-  bottom: 0;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  left: 25%;
 }
 
 .clear-history:hover {

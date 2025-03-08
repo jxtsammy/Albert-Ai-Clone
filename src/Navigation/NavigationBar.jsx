@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { Link } from 'react-router-dom';
+import { Search} from "lucide-react";
 import "./NavStyles.css";
 
 const NavigationBar = () => {
@@ -40,18 +41,18 @@ const NavigationBar = () => {
           <button className="close-btn" onClick={() => setIsOpen(false)}>✕</button>
           <ul>
             <li><Link to="/">Home</Link></li>
+            <li><Link to="/login">Client Login</Link></li>
             <li><Link to="/vision">Our Vision</Link></li>
-            <li><Link to="/impact">Impact</Link></li>
-            <li><Link to="/product">Product</Link></li>
-            <li><Link to="/resources">Resources</Link></li>
             <li><Link to="/about-us">About Us</Link></li>
             <li><Link to="/pricing">Pricing</Link></li>
-            <li><Link to="/login">Client Login</Link></li>
             <li><Link to="/contact-us">Contact Us</Link></li>
+            <li><Link to="#">Impact</Link></li>
+            <li><Link to="#">Product</Link></li>
+            <li><Link to="#">Resources</Link></li>
           </ul>
           <div className="search-container">
             <input type="text" placeholder="Search ..." />
-            <button>🔍</button>
+            <button><Search/></button>
           </div>
           <p className="FAQs">FAQs</p>
           <p className="PP">Privacy Policy</p>

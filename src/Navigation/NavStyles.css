@@ -99,8 +99,10 @@ ul li a {
 .search-container {
   display: flex;
   margin-top: 20px;
-  background-color: white;
   border-radius: 20px;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
 }
 
 .search-container input {
@@ -108,14 +110,17 @@ ul li a {
   flex: 1;
   color: black;
   background-color: white;
+  border: none;
 }
 
 .search-container button {
-  padding: 8px;
+  padding: 1.5px;
   border: none;
   cursor: pointer;
-  border-radius: 0 5px 5px 0;
+  border-radius: 0;
   background-color: white;
+  margin-bottom: 5px;
+  color: black;
 }
 
 .sidebar p {

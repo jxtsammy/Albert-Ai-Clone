@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom';
 const SignUp = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -77,6 +78,16 @@ const SignUp = () => {
             className="input-field"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+
+          {/* Email Input */}
+          <input
+            type="phone"
+            placeholder="Enter Phone"
+            className="input-field"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
             required
           />
 
