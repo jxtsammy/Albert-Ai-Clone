@@ -613,6 +613,72 @@
   cursor: pointer;
 }
 
+/* Tablet Screens (max-width: 1024px) */
+@media (max-width: 1024px) {
+  .albert-chat-box {
+    width: 80%;
+    height: 400px;
+  }
+
+  .albert-message-box {
+    width: 80%;
+  }
+}
+
+/* Mobile Screens (max-width: 768px) */
+@media (max-width: 768px) {
+  .albert-container {
+    flex-direction: row; /* Ensure layout stays side-by-side */
+  }
+
+  .albert-sidebar {
+    width: 100px; /* Slightly reduce width */
+    height: 100vh;
+    padding: 10px 0;
+  }
+
+  .albert-sidebar-icons {
+    gap: 20px;
+  }
+
+  .albert-main-content {
+    padding: 10px;
+    margin-left: 70px; /* Adjust content to avoid overlap */
+  }
+
+  .albert-chat-box {
+    width: 85%;
+    height: 350px;
+  }
+
+  .albert-message-box {
+    width: 85%;
+  }
+}
+
+/* Small Mobile Screens (max-width: 480px) */
+@media (max-width: 480px) {
+
+  .albert-main-content {
+    margin-left: 60px;
+    padding: 5px;
+  }
+
+  .albert-chat-box {
+    width: 90%;
+    height: 300px;
+  }
+
+  .albert-message-box {
+    width: 90%;
+  }
+
+  .scroll-to-bottom {
+    right: 15px;
+    bottom: 20px;
+  }
+}
+
 
 
 
