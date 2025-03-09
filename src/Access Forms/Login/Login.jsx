@@ -27,7 +27,7 @@ const Login = () => {
           required
         />
           <a href="#" className="forgot-password">Forgot your password?</a>
-        <button  type="submit" onClick={handleLogin}>Login</button>
+        <button  type="submit" onClick={handleLogin} className="login-button">Login</button>
         <div className="checkbox-container">
           <label className="checkbox-label">
           <input
@@ -47,8 +47,8 @@ const Login = () => {
         <p>Dont have an account? <Link to="/signup">Register</Link></p>
       </div>
 
-      <div className="floating-squares">
-        {[...Array(30)].map((_, i) => (
+      <div className="floating-square">
+        {[...Array(100)].map((_, i) => (
           <div key={i} className={`square square-${i}`} />
         ))}
       </div>

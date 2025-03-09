@@ -1,6 +1,3 @@
-html{
-  background-color: #000;
-}
 
 /* Base Styles */
 .albert-container {
@@ -9,6 +6,7 @@ html{
   color: white;
   font-family: Arial, sans-serif;
   width: 100vw;
+  
 }
 
 .albert-sidebar {
@@ -98,7 +96,17 @@ html{
   color: white;
 }
 
+.albert-profile-icon:hover{
+  color: #2d44f0;
+}
 
+.messageI:hover{
+  color: #2d44f0;
+}
+
+.historyI:hover{
+  color: #2d44f0;
+}
 
 .albert-main-content {
   flex: 1;
@@ -585,12 +593,12 @@ html{
   display: flex;
   justify-content: space-between;
   margin-top: 20px;
-  gap: 20px;
+
 }
 
 .clear-modal-cancel-btn {
   background: gray;
-  padding: 10px 10px;
+  padding: 10px 80px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -599,7 +607,7 @@ html{
 .clear-modal-confirm-btn {
   background: red;
   color: white;
-  padding: 10px 15px;
+  padding: 10px 80px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -641,83 +649,18 @@ html{
 }
 
 /* Random Positions & Colors */
-.Al-floating-square:nth-child(1) { left: 10%; animation-duration: 4s; background: #ff6b6b; }
-.A-floating-square:nth-child(2) { left: 20%; animation-duration: 5s; background: #6bcbff; }
+.Al-floating-square:nth-child(1) { left: 10%; animation-duration: 4s; background: #f42020; }
+.A-floating-square:nth-child(2) { left: 20%; animation-duration: 5s; background: #128bcd; }
 .Al-floating-square:nth-child(3) { left: 30%; animation-duration: 6s; background: #ffb86b; }
-.Al-floating-square:nth-child(4) { left: 40%; animation-duration: 4.5s; background: #d36bff; }
+.Al-floating-square:nth-child(4) { left: 40%; animation-duration: 4.5s; background: #7a14a7; }
 .Al-floating-square:nth-child(5) { left: 50%; animation-duration: 5.5s; background: #6bff88; }
-.Al-floating-square:nth-child(6) { left: 60%; animation-duration: 6.5s; background: #ff6be5; }
-.Al-floating-square:nth-child(7) { left: 70%; animation-duration: 4.2s; background: #6bffff; }
-.Al-floating-square:nth-child(8) { left: 80%; animation-duration: 5.8s; background: #ffde6b; }
+.Al-floating-square:nth-child(6) { left: 60%; animation-duration: 6.5s; background: #c904a5; }
+.Al-floating-square:nth-child(7) { left: 70%; animation-duration: 4.2s; background: #39cfcf; }
+.Al-floating-square:nth-child(8) { left: 80%; animation-duration: 5.8s; background: #ffc904; }
 .Al-floating-square:nth-child(9) { left: 90%; animation-duration: 6.3s; background: #b06bff; }
 .Al-floating-square:nth-child(10) { left: 70%; animation-duration: 4.8s; background: #ff6b94; }
 .Al-floating-square:nth-child(11) { left: 7%; animation-duration: 5.2s; background: #ff8b8b; }
-.Al-floating-square:nth-child(12) { left: 18%; animation-duration: 4.6s; background: #8bcfff; }
+.Al-floating-square:nth-child(12) { left: 18%; animation-duration: 4.6s; background: #0078cd; }
 .Al-floating-square:nth-child(13) { left: 28%; animation-duration: 5.9s; background: #ffc98b; }
-.Al-floating-square:nth-child(14) { left: 38%; animation-duration: 4.4s; background: #e08bff; }
+.Al-floating-square:nth-child(14) { left: 38%; animation-duration: 4.4s; background: #b307f1; }
 .Al-floating-square:nth-child(15) { left: 48%; animation-duration: 5.7s; background: #8bffac; }
-
-/* Responsive Styles */
-@media (max-width: 768px) {
-  .albert-sidebar {
-    width: 60px; /* Reduce sidebar width */
-    padding: 10px 0;
-  }
-
-  .albert-sidebar-icons {
-    gap: 20px; /* Reduce gap between icons */
-  }
-
-  .albert-chat-box {
-    width: 90%; /* Make chat box wider on smaller screens */
-    max-height: 50vh; /* Adjust max height */
-  }
-
-  .albert-message-box {
-    width: 80%; /* Make message box wider on smaller screens */
-    padding: 15px; /* Reduce padding */
-  }
-
-  .albert-textarea {
-    font-size: 14px; /* Reduce font size for smaller screens */
-  }
-
-  .albert-buttons {
-    flex-direction: row; /* Stack buttons vertically */
-    gap: 50px;
-  }
-}
-
-@media (max-width: 480px) {
-  .albert-sidebar {
-    width: 50px; /* Further reduce sidebar width */
-  }
-
-  .albert-sidebar-menu-icon {
-    margin-bottom: 20px; /* Reduce margin */
-  }
-
-  .albert-sidebar-icons {
-    gap: 15px; /* Further reduce gap between icons */
-  }
-
-  .albert-chat-box {
-    width: 95%; /* Make chat box almost full width */
-    max-height: 60vh; /* Adjust max height */
-  }
-
-  .albert-message-box {
-    width: 70%; /* Make message box almost full width */
-    padding: 10px; /* Further reduce padding */
-  }
-
-  .albert-textarea {
-    font-size: 12px; /* Further reduce font size */
-  }
-
-  .albert-deepthink-btn,
-  .albert-search-btn {
-    font-size: 14px; /* Reduce button font size */
-    height: 24px; /* Reduce button height */
-  }
-}

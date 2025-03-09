@@ -108,7 +108,7 @@
 }
 
 /* Button */
-button {
+pricing-button {
   width: 100%;
   padding: 10px;
   background: #2d44f0;
@@ -120,7 +120,7 @@ button {
   margin-top: 5px;
 }
 
-button:hover {
+pricing-button:hover {
   background: #1e30c1;
 }
 

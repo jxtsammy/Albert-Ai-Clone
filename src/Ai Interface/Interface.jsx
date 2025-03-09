@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { MessageSquarePlus, History, Menu, Paperclip, ArrowUp, ArrowDown, Atom, Globe, User, X, Settings, Trash2, Mail, LogOut,} from "lucide-react";
 import "./Ai.css";
+import { useNavigate } from "react-router-dom";
 
 const Albert = () => {
   const [message, setMessage] = useState("");
@@ -19,6 +20,15 @@ const Albert = () => {
   const [showHistory, setShowHistory] = useState(false);
   const [activeChat, setActiveChat] = useState(null);
   const [showModal, setShowModal] = useState(false);
+  const navigate = useNavigate();
+
+  const handelContactUs = () =>{
+    navigate("/contact-us");
+  }
+
+  const handelLogout = () => {
+    navigate("/")
+  }
 
   const handleSendMessage = () => {
     if (message.trim() === "" && imagePreviews.length === 0) return;
@@ -222,17 +232,14 @@ const Albert = () => {
     setShowHistory(false);
   };
 
-
-
-
   return (
     <div className="albert-container">
       {/* Sidebar */}
       <div className="albert-sidebar">
         <Menu className="albert-sidebar-menu-icon" />
         <div className="albert-sidebar-icons">
-          <MessageSquarePlus onClick={handleNewChat} style={{ cursor: "pointer" }} />
-          <History onClick={() => setShowHistory(true)} style={{ cursor: "pointer" }} />
+          <MessageSquarePlus className="messageI" onClick={handleNewChat} style={{ cursor: "pointer" }} />
+          <History className="historyI" onClick={() => setShowHistory(true)} style={{ cursor: "pointer" }} />
         </div>
         <div className="albert-profile-section" ref={profileRef}>
           <User className="albert-profile-icon" onClick={toggleProfileMenu} />
@@ -241,8 +248,8 @@ const Albert = () => {
               <p>{name}</p>
               <div className="profile-menu-item"  onClick={toggleSettings}><Settings /> Settings</div>
               <div className="profile-menu-item" onClick={() => setShowModal(true)}><Trash2 /> Delete all chats</div>
-              <div className="profile-menu-item"><Mail /> Contact us</div>
-              <div className="profile-menu-item"><LogOut /> Log out</div>
+              <div className="profile-menu-item" onClick={handelContactUs}><Mail /> Contact us</div>
+              <div className="profile-menu-item" onClick={handelLogout}><LogOut /> Log out</div>
             </div>
           )}
         </div>

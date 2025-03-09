@@ -1,4 +1,4 @@
-import React from "react";
+import "react";
 import "./Pricing.css";
 import logo from "../assets/albertzoomd-logo_01-01.png";
 import NavigationBar from "../Navigation/NavigationBar";
@@ -76,7 +76,7 @@ function Pricing() {
               <div className="pricing-form-group">
                 <textarea placeholder="Message" required></textarea>
               </div>
-              <button type="submit">Submit</button>
+              <button type="submit" className="pricing-button">Submit</button>
             </form>
           </div>
         </div>
