@@ -28,10 +28,6 @@ html{
   margin-bottom: 30px;
 }
 
-.albert-sidebar-menu-icon:hover{
-  color: #1c32b4;
-}
-
 .albert-sidebar-icons {
   display: flex;
   flex-direction: column;
@@ -158,9 +154,6 @@ html{
   width: 40px;
 }
 
-.scroll-to-bottom:hover {
-  background: #1c32b4;
-}
 
 .chat-message {
   word-wrap: break-word; /* Breaks long words */
@@ -446,7 +439,7 @@ html{
 }
 
 .Al-delete-button {
-  background: #d9534f;
+  background: red;
   color: white;
   border: none;
   padding: 6px;
@@ -456,9 +449,6 @@ html{
   flex: 0.2;
 }
 
-.delete-button:hover {
-  background: #c9302c;
-}
 
 
 /* General Modal Styling */
@@ -494,6 +484,15 @@ html{
 .history-header .close-history:hover {
   color: white;
 }
+
+.history-date {
+  font-weight: bold;
+  font-size: 1rem;
+  margin-top: 10px;
+  padding: 5px 0;
+  color: #555;
+}
+
 
 .history-body {
   flex: 1; /* Takes all available space */
@@ -537,7 +536,7 @@ html{
 
 /* Clear History Button */
 .clear-history {
-  width: 50%;
+  width: 70%;
   display: flex;
   background: #ff4d4d;
   color: white;
@@ -551,7 +550,7 @@ html{
   align-items: center;
   justify-content: center;
   position: relative;
-  left: 25%;
+  left: 15%;
   
 }
 
@@ -598,7 +597,7 @@ html{
 }
 
 .clear-modal-confirm-btn {
-  background: #2d44f0;
+  background: red;
   color: white;
   padding: 10px 15px;
   border: none;

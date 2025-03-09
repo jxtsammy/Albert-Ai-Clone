@@ -22,7 +22,7 @@ const Albert = () => {
 
   const handleSendMessage = () => {
     if (message.trim() === "" && imagePreviews.length === 0) return;
-
+  
     let newMessages = [];
     if (message.trim()) {
       newMessages.push({ sender: "user", text: message });
@@ -30,32 +30,51 @@ const Albert = () => {
     if (imagePreviews.length > 0) {
       newMessages.push({ sender: "user", images: [...imagePreviews] });
     }
-
+  
     const updatedChat = [...chat, ...newMessages, { sender: "ai", text: "This is a dummy AI response." }];
     setChat(updatedChat);
     setMessage("");
     setImagePreviews([]);
     setMessageSent(true);
-
-    // ✅ Update chat history instead of adding a new entry
+  
     if (activeChat) {
-      // Find and update the existing chat
       const updatedHistory = chatHistory.map((chatItem) =>
         chatItem.id === activeChat.id ? { ...chatItem, messages: updatedChat } : chatItem
       );
       setChatHistory(updatedHistory);
       setActiveChat({ ...activeChat, messages: updatedChat });
     } else {
-      // ✅ Create a new chat if it's a fresh conversation
-      const newChat = { id: Date.now(), title: updatedChat[0].text || "New Chat", messages: updatedChat };
+      const newChat = {
+        id: Date.now(),
+        title: updatedChat[0].text || "New Chat",
+        messages: updatedChat,
+        timestamp: new Date().toISOString(), // ✅ Save timestamp
+      };
       setChatHistory([...chatHistory, newChat]);
       setActiveChat(newChat);
     }
-
+  
     setTimeout(() => {
       scrollToBottom();
     }, 100);
   };
+
+  const groupChatsByDate = (chats) => {
+    const groupedChats = {};
+  
+    chats.forEach((chat) => {
+      const date = new Date(chat.timestamp).toDateString(); // Format: "Mon Mar 11 2024"
+      
+      if (!groupedChats[date]) {
+        groupedChats[date] = [];
+      }
+      
+      groupedChats[date].push(chat);
+    });
+  
+    return groupedChats;
+  };
+  
 
 
   const handleNewChat = () => {
@@ -250,7 +269,7 @@ const Albert = () => {
                 }}
                 className="clear-modal-confirm-btn"
               >
-                Confirm deletion
+                Clear Chat
               </button>
             </div>
           </div>
@@ -318,35 +337,42 @@ const Albert = () => {
 
       {/* Chat History Modal */}
       {showHistory && (
-        <div className="history-modal">
-          <div className="history-content">
-            <div className="history-header">
-              <h2>Chat History</h2>
-              <X className="close-history" onClick={() => setShowHistory(false)} />
+  <div className="history-modal">
+    <div className="history-content">
+      <div className="history-header">
+        <h2>Chat History</h2>
+        <X className="close-history" onClick={() => setShowHistory(false)} />
+      </div>
+
+      <div className="history-body">
+        {chatHistory.length === 0 ? (
+          <p className="no-history">No previous chats</p>
+        ) : (
+          Object.entries(groupChatsByDate(chatHistory)).map(([date, chats]) => (
+            <div key={date} className="chat-date-group">
+              <h3 className="history-date">{date}</h3>
+              {chats.map((chatItem) => (
+                <div
+                  key={chatItem.id}
+                  className="history-item"
+                  onClick={() => loadChat(chatItem)}
+                >
+                  <p>{chatItem.title}</p>
+                  <Trash2 className="delete-chat" onClick={(e) => deleteChat(e, chatItem.id)} />
+                </div>
+              ))}
             </div>
-            {/* Scrollable Chat List */}
-            <div className="history-body">
-              {chatHistory.length === 0 ? (
-                <p className="no-history">No previous chats</p>
-              ) : (
-                chatHistory.map((chatItem) => (
-                  <div
-                    key={chatItem.id}
-                    className="history-item"
-                    onClick={() => loadChat(chatItem)}
-                  >
-                    <p>{chatItem.title}</p>
-                    <Trash2 className="delete-chat" onClick={(e) => deleteChat(e, chatItem.id)} />
-                  </div>
-                ))
-              )}
-            </div>
-            {chatHistory.length > 0 && (
-              <button className="clear-history" onClick={() => setShowModal(true)}>Clear History</button>
-            )}
-          </div>
-        </div>
+          ))
+        )}
+      </div>
+
+      {chatHistory.length > 0 && (
+        <button className="clear-history" onClick={() => setShowModal(true)}>Clear History</button>
       )}
+    </div>
+  </div>
+      )}
+
 
       {/* Main Content */}
       <div className="albert-main-content">
