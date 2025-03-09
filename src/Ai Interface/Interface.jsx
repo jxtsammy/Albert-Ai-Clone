@@ -12,12 +12,13 @@ const Albert = () => {
   const chatBoxRef = useRef(null);
   const fileInputRef = useRef(null);
   const [name, setName] = useState("Samuel Sallo");
-  const [email, setEmail] = useState("rober****mes001@gmail.com");
+  const [email, setEmail] = useState("rober****@gmail.com");
   const [phone, setPhone] = useState("");
   const [edited, setEdited] = useState(false);
   const [chatHistory, setChatHistory] = useState([]);
   const [showHistory, setShowHistory] = useState(false);
   const [activeChat, setActiveChat] = useState(null);
+  const [showModal, setShowModal] = useState(false);
 
   const handleSendMessage = () => {
     if (message.trim() === "" && imagePreviews.length === 0) return;
@@ -178,10 +179,18 @@ const Albert = () => {
     setEdited(false);
   };
 
-  const deleteChat = (index) => {
-    const updatedHistory = chatHistory.filter((_, i) => i !== index);
+  const deleteChat = (e, chatId) => {
+    e.stopPropagation(); // Prevents triggering `loadChat`
+    const updatedHistory = chatHistory.filter((chat) => chat.id !== chatId);
     setChatHistory(updatedHistory);
+  
+    // If the active chat is deleted, clear it
+    if (activeChat?.id === chatId) {
+      setActiveChat(null);
+      setChat([]);
+    }
   };
+  
 
   const clearHistory = () => {
     setChatHistory([]);
@@ -212,12 +221,41 @@ const Albert = () => {
             <div className="profile-menu">
               <p>{name}</p>
               <div className="profile-menu-item"  onClick={toggleSettings}><Settings /> Settings</div>
-              <div className="profile-menu-item"><Trash2 /> Delete all chats</div>
+              <div className="profile-menu-item" onClick={() => setShowModal(true)}><Trash2 /> Delete all chats</div>
               <div className="profile-menu-item"><Mail /> Contact us</div>
               <div className="profile-menu-item"><LogOut /> Log out</div>
             </div>
           )}
         </div>
+
+        {/* Confirmation Modal */}
+      {showModal && (
+        <div className="modal-overlay">
+          <div className="modal">
+            <h2>Delete all chats</h2>
+            <p>
+              If you confirm deletion, all chat history for this account will be
+              permanently erased and cannot be recovered.
+            </p>
+            <p>Are you sure you want to delete all chat history?</p>
+
+            <div className="clear-modal-buttons">
+              <button onClick={() => setShowModal(false)} className="clear-modal-cancel-btn">
+                Cancel
+              </button>
+              <button
+                onClick={() => {
+                  clearHistory();
+                  setShowModal(false);
+                }}
+                className="clear-modal-confirm-btn"
+              >
+                Confirm deletion
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
        {/* Settings Modal */}
         {showSettings && (
@@ -304,7 +342,7 @@ const Albert = () => {
               )}
             </div>
             {chatHistory.length > 0 && (
-              <button className="clear-history" onClick={clearHistory}>Clear History</button>
+              <button className="clear-history" onClick={() => setShowModal(true)}>Clear History</button>
             )}
           </div>
         </div>
