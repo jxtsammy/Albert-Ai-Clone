@@ -62,6 +62,13 @@ button{
   width: 100%;
 }
 
+.login-error-message {
+  color: red; /* Error text color */
+  font-size: 14px; /* Error text size */
+  margin-top: 10px; /* Add margin-top */
+  text-align: center; /* Center the error message */
+}
+
 .checkbox-container {
   margin-top: 20px;
   display: flex;

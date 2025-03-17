@@ -5,6 +5,9 @@ import { Typewriter } from "react-simple-typewriter";
 import logo from "../../assets/albertzoomd-logo_01-02-2.png"; // Your logo path
 import { FaEye, FaEyeSlash } from "react-icons/fa"; // Eye icons for password toggle
 import { Link } from 'react-router-dom';
+import { auth, firestore } from "../../index"; // Import Firebase auth and Firestore
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { doc, setDoc } from "firebase/firestore";
 
 const SignUp = () => {
   const [name, setName] = useState("");
@@ -15,25 +18,73 @@ const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   // Handle form submission
-  const handleSubmit = (e) => {
+  // Handle form submission
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Validate password length
     if (password.length < 6) {
       setError("Password must be at least 6 characters long.");
       return;
     }
+
+    // Set loading state
+    setLoading(true);
+
+    // Validate password match
     if (password !== confirmPassword) {
       setError("Passwords do not match.");
       return;
     }
-    setError("");
-    alert("Sign-up successful!"); // Replace with actual signup logic
-  };
 
-  const handleRegister = () => {
-    navigate("/Albert.ai"); // Redirect to Albert.ai page
+    // Clear any previous errors
+    setError("");
+
+    try {
+      // Step 1: Create user with Firebase Authentication
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password // Use the `password` field, not `confirmPassword`
+      );
+
+      // Signed up successfully
+      const user = userCredential.user;
+      console.log("User signed up:", user);
+
+      // Step 2: Save additional user data to Firestore
+      await setDoc(doc(firestore, "Users", user.uid), {
+        name: name,
+        email: email,
+        phone: phone,
+        createdAt: new Date().toISOString(), // Add a timestamp
+      });
+
+      console.log("User data saved to Firestore");
+
+      // Redirect to Albert.ai page
+      navigate("/Albert.ai");
+    } catch (error) {
+      // Handle errors
+      console.error("Error signing up:", error.message);
+      setError(error.message); // Display error message to the user
+
+       // Display specific error messages
+       switch (error.code) {
+        case "auth/network-request-failed":
+          setError("Check your connection.");
+          break;
+        default:
+          setError("An error occurred. Please try again.");
+      }
+    } finally {
+      // Reset loading state
+      setLoading(false);
+    }
   };
 
   return (
@@ -131,7 +182,9 @@ const SignUp = () => {
           {error && <p className="error-message">{error}</p>}
 
           {/* Sign Up Button */}
-          <button type="submit" className="signup-button" onClick={handleRegister}>Sign Up</button>
+          <button type="submit" className="signup-button">
+          {loading ? "Creating Account..." : "Register"}
+          </button>
         </form>
       </div>
       <div className="floating-square">

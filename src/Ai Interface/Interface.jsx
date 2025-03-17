@@ -2,6 +2,8 @@ import { useState, useEffect, useRef } from "react";
 import { MessageSquarePlus, History, Menu, Paperclip, ArrowUp, ArrowDown, Atom, Globe, User, X, Settings, Trash2, Mail, LogOut,} from "lucide-react";
 import "./Ai.css";
 import { useNavigate } from "react-router-dom";
+import { auth } from "../index"; // Import Firebase auth
+import { signOut, deleteUser } from "firebase/auth";
 
 const Albert = () => {
   const [message, setMessage] = useState("");
@@ -12,23 +14,47 @@ const Albert = () => {
   const [uploadProgress, setUploadProgress] = useState({});
   const chatBoxRef = useRef(null);
   const fileInputRef = useRef(null);
-  const [name, setName] = useState("Samuel Sallo");
-  const [email, setEmail] = useState("rober****@gmail.com");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [edited, setEdited] = useState(false);
   const [chatHistory, setChatHistory] = useState([]);
   const [showHistory, setShowHistory] = useState(false);
   const [activeChat, setActiveChat] = useState(null);
   const [showModal, setShowModal] = useState(false);
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const handelContactUs = () =>{
     navigate("/contact-us");
   }
 
-  const handelLogout = () => {
-    navigate("/")
-  }
+  // Check if the user is authenticated
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (!user) {
+        // If the user is not authenticated, redirect to the login page
+        navigate("/login");
+      }
+    });
+
+    // Cleanup the subscription
+    return () => unsubscribe();
+  }, [navigate]);
+
+  const handleLogout = async () => {
+    try {
+      // Sign out the user
+      await signOut(auth);
+  
+      // Redirect to the home page
+      navigate("/");
+  
+      console.log("User signed out successfully.");
+    } catch (error) {
+      console.error("Error signing out:", error.message);
+    }
+  };
 
   const handleSendMessage = () => {
     if (message.trim() === "" && imagePreviews.length === 0) return;
@@ -230,6 +256,30 @@ const Albert = () => {
     setChat(chatItem.messages);
     setMessageSent(true);
     setShowHistory(false);
+    
+  };
+
+  const handleDeleteAccount = async () => {
+    try {
+      // Get the currently authenticated user
+      const user = auth.currentUser;
+  
+      if (!user) {
+        throw new Error("No user is currently signed in.");
+      }
+  
+      // Delete the user's account
+      await deleteUser(user);
+  
+      // Redirect to the home page
+      navigate("/");
+  
+      console.log("User account deleted successfully.");
+      
+    } catch (error) {
+      console.error("Error deleting account:", error.message);
+      setError(error.message);
+    }
   };
 
   return (
@@ -249,7 +299,7 @@ const Albert = () => {
               <div className="profile-menu-item"  onClick={toggleSettings}><Settings /> Settings</div>
               <div className="profile-menu-item" onClick={() => setShowModal(true)}><Trash2 /> Delete all chats</div>
               <div className="profile-menu-item" onClick={handelContactUs}><Mail /> Contact us</div>
-              <div className="profile-menu-item" onClick={handelLogout}><LogOut /> Log out</div>
+              <div className="profile-menu-item" onClick={handleLogout}><LogOut /> Log out</div>
             </div>
           )}
         </div>
@@ -334,8 +384,9 @@ const Albert = () => {
                 </div>
                 <div className="settings-item delete-section">
                   <span>Delete account</span>
-                  <button className="Al-delete-button">Delete</button>
+                  <button className="Al-delete-button" onClick={handleDeleteAccount}>Delete</button>
                 </div>
+                {error && <p className="error-message">{error}</p>}
               </div>
             </div>
           </div>
@@ -440,7 +491,7 @@ const Albert = () => {
               rows="1"
               onChange={(e) => setMessage(e.target.value)}
               onKeyDown={handleKeyDown}
-
+              
             ></textarea>
 
             {/* File Upload */}
