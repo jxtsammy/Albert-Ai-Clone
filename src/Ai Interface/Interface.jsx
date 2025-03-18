@@ -4,6 +4,7 @@ import "./Ai.css";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../index"; // Import Firebase auth
 import { signOut, deleteUser } from "firebase/auth";
+import axios from "axios"
 
 const Albert = () => {
   const [message, setMessage] = useState("");
@@ -24,6 +25,9 @@ const Albert = () => {
   const [showModal, setShowModal] = useState(false);
   const [error, setError] = useState("");
   const navigate = useNavigate();
+
+  const DEEPSEEK_API_KEY = "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"; // Replace with your actual API key
+  const DEEPSEEK_API_URL = "https://openrouter.ai/api/v1/chat/completions"; // Replace with the actual API endpoint
 
   const handelContactUs = () =>{
     navigate("/contact-us");
@@ -55,8 +59,8 @@ const Albert = () => {
       console.error("Error signing out:", error.message);
     }
   };
-
-  const handleSendMessage = () => {
+  
+  const handleSendMessage = async () => {
     if (message.trim() === "" && imagePreviews.length === 0) return;
   
     let newMessages = [];
@@ -67,27 +71,61 @@ const Albert = () => {
       newMessages.push({ sender: "user", images: [...imagePreviews] });
     }
   
-    const updatedChat = [...chat, ...newMessages, { sender: "ai", text: "This is a dummy AI response." }];
+    const updatedChat = [...chat, ...newMessages];
     setChat(updatedChat);
     setMessage("");
     setImagePreviews([]);
     setMessageSent(true);
   
-    if (activeChat) {
-      const updatedHistory = chatHistory.map((chatItem) =>
-        chatItem.id === activeChat.id ? { ...chatItem, messages: updatedChat } : chatItem
+    try {
+      console.log("Sending request to DeepSeek API...");
+      const response = await axios.post(
+        DEEPSEEK_API_URL,
+        {
+          model: "deepseek-chat", // Replace with the correct model name
+          messages: [{ role: "user", content: message }],
+        },
+        {
+          headers: {
+            "Authorization": `Bearer ${DEEPSEEK_API_KEY}`,
+            "Content-Type": "application/json",
+          },
+        }
       );
-      setChatHistory(updatedHistory);
-      setActiveChat({ ...activeChat, messages: updatedChat });
-    } else {
-      const newChat = {
-        id: Date.now(),
-        title: updatedChat[0].text || "New Chat",
-        messages: updatedChat,
-        timestamp: new Date().toISOString(), // ✅ Save timestamp
-      };
-      setChatHistory([...chatHistory, newChat]);
-      setActiveChat(newChat);
+  
+      console.log("API Response:", response.data);
+  
+      const aiResponse = response.data.choices[0].message.content;
+      const updatedChatWithAI = [...updatedChat, { sender: "ai", text: aiResponse }];
+      setChat(updatedChatWithAI);
+  
+      if (activeChat) {
+        const updatedHistory = chatHistory.map((chatItem) =>
+          chatItem.id === activeChat.id ? { ...chatItem, messages: updatedChatWithAI } : chatItem
+        );
+        setChatHistory(updatedHistory);
+        setActiveChat({ ...activeChat, messages: updatedChatWithAI });
+      } else {
+        const newChat = {
+          id: Date.now(),
+          title: updatedChat[0].text || "New Chat",
+          messages: updatedChatWithAI,
+          timestamp: new Date().toISOString(),
+        };
+        setChatHistory([...chatHistory, newChat]);
+        setActiveChat(newChat);
+      }
+    } catch (error) {
+      console.error("Error calling DeepSeek API:", error);
+      if (error.response) {
+        console.error("API Response Error:", error.response.data);
+      } else if (error.request) {
+        console.error("No response received:", error.request);
+      } else {
+        console.error("Error:", error.message);
+      }
+      const updatedChatWithAI = [...updatedChat, { sender: "ai", text: "Sorry, I couldn't process your request. Please try again later." }];
+      setChat(updatedChatWithAI);
     }
   
     setTimeout(() => {

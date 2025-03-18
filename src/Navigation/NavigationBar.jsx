@@ -42,6 +42,7 @@ const NavigationBar = () => {
           <ul>
             <li><Link to="/">Home</Link></li>
             <li><Link to="/login">Client Login</Link></li>
+            <li><Link to="/signup">Register</Link></li>
             <li><Link to="/vision">Our Vision</Link></li>
             <li><Link to="/about-us">About Us</Link></li>
             <li><Link to="/pricing">Pricing</Link></li>
