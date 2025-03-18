@@ -560,7 +560,7 @@
   justify-content: center;
   position: relative;
   left: 15%;
-  
+  z-index: 1;
 }
 
 .clear-history:hover {
