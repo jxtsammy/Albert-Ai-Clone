@@ -610,6 +610,7 @@ const Albert = () => {
                         padding: "5px",
                         borderRadius: "50%",
                         cursor: "pointer",
+                        fontSize:"26px"
                       }}
                       onClick={handleCancelClick}
                       size={30}
