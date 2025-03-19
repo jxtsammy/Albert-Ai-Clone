@@ -97,15 +97,15 @@
 }
 
 .albert-profile-icon:hover{
-  color: #2d44f0;
+  color: #088a6a;
 }
 
 .messageI:hover{
-  color: #2d44f0;
+  color: #088a6a;
 }
 
 .historyI:hover{
-  color: #2d44f0;
+  color: #088a6a;
 }
 
 .albert-main-content {
@@ -122,6 +122,7 @@
   z-index: -1;
   font-family: Arial, sans-serif;
   font-size: 40px;
+  width: 550px;
 }
 
 .AlAsk{
@@ -139,15 +140,16 @@
   display: flex;
   flex-direction: column;
   gap: 5px;
-  margin-bottom: 80px;
+  margin-bottom: 75px;
+  background-color: #2c2c2e;
 }
 
 /* Scroll to Bottom Button */
 .scroll-to-bottom {
   position: absolute;
-  top: 240px;
-  right: 170px;
-  background: #2d44f0;
+  bottom: 100px;
+  right: 180px;
+  background: #088a6a;
   color: white;
   border: none;
   border-radius: 50%;
@@ -158,8 +160,8 @@
   justify-content: center;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: opacity 0.3s ease-in-out;
-  height: 40px;
-  width: 40px;
+  height: 35px;
+  width: 35px;
 }
 
 
@@ -218,10 +220,8 @@
   color: white;
   outline: none;
   resize: none;
-  height: auto;
   font-family: Arial, sans-serif;
   font-size: 16px;
-  max-height: 400px;
 }
 
 .albert-buttons {
@@ -239,6 +239,15 @@
 }
 
 .albert-send-icon {
+  width: 30px;
+  height: 30px;
+  font-size: 12px;
+  border-radius: 60%;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.albert-stop-icon {
   width: 30px;
   height: 30px;
   font-size: 12px;
@@ -297,27 +306,6 @@
   max-width: 100%;
   max-height: 300px;
   border-radius: 8px;
-}
-
-
-.albert-deepthink-btn,
-.albert-search-btn {
-  background: #555;
-  border: none;
-  color: white;
-  border-radius: 20px;
-  cursor: pointer;
-  align-items: center;
-  justify-content: center;
-  display: flex;
-  height: 28px;
-  font-size: 16px;
-  width: auto;
-}
-
-.albert-deepthink-btn:hover,
-.albert-search-btn:hover {
-  background: #777;
 }
 
 
@@ -745,11 +733,11 @@
 
 .chat-message.ai {
   align-self: flex-start; /* Align AI messages to the left */
-  background-color: #2d44f0;
+  background-color: #088a6a;
   color: black;
   border-radius: 15px 15px 15px 0;
   padding: 10px;
-  margin: 5px 0;
+  margin: 15px 0;
   max-width: 70%;
   color: white;
 }

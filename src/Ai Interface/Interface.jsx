@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { MessageSquarePlus, History, Menu, Paperclip, ArrowUp, ArrowDown, User, X, Settings, Trash2, Mail, LogOut,} from "lucide-react";
+import { MessageSquarePlus, History, Menu, Paperclip, Send, ArrowDown, User, X, Settings, Trash2, Mail, LogOut, Square} from "lucide-react";
 import "./Ai.css";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../index"; // Import Firebase auth
@@ -24,7 +24,9 @@ const Albert = () => {
   const [activeChat, setActiveChat] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [error, setError] = useState("");
+  const [isSending, setIsSending] = useState(false);
   const navigate = useNavigate();
+  const abortControllerRef = useRef(null);
   //const [isLoading, setIsLoading] = useState(false);
 
   const DEEPSEEK_API_KEY = "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"; // Replace with your actual API key
@@ -76,6 +78,7 @@ const Albert = () => {
     setMessage("");
     setImagePreviews([]);
     setMessageSent(true);
+    setIsSending(true); // Set sending state
   
     // Add a temporary AI message with isLoading: true
     const tempAIMessage = {
@@ -86,6 +89,9 @@ const Albert = () => {
   
     setChat((prevChat) => [...prevChat, tempAIMessage]);
   
+    // Create a new abort controller
+    abortControllerRef.current = new AbortController();
+    
     try {
       console.log("Sending request to DeepSeek API...");
       const response = await axios.post(
@@ -99,11 +105,11 @@ const Albert = () => {
             Authorization: `Bearer ${DEEPSEEK_API_KEY}`,
             "Content-Type": "application/json",
           },
+          signal: abortControllerRef.current.signal, // Pass the abort signal
         }
       );
   
       console.log("API Response:", response.data);
-  
       const aiResponse = response.data.choices[0].message.content;
   
       // Replace the temporary AI message with the actual response
@@ -114,19 +120,47 @@ const Albert = () => {
       });
   
     } catch (error) {
-      console.error("Error calling DeepSeek API:", error);
-      setChat((prevChat) => {
-        const updatedChat = [...prevChat];
-        updatedChat[updatedChat.length - 1] = { sender: "ai", text: "Sorry, I couldn't process your request. Please try again later.", isLoading: false };
-        return updatedChat;
-      });
+      if (axios.isCancel(error)) { // Check if the request was canceled
+        console.log("Message sending canceled.");
+        setChat((prevChat) => {
+          const updatedChat = [...prevChat];
+          updatedChat[updatedChat.length - 1] = { 
+            sender: "ai", 
+            text: "Couldn't get your message.", 
+            isLoading: false 
+          };
+          return updatedChat;
+        });
+      } else {
+        console.error("Error calling DeepSeek API:", error);
+        setChat((prevChat) => {
+          const updatedChat = [...prevChat];
+          updatedChat[updatedChat.length - 1] = {
+            sender: "ai",
+            text: "Sorry, I couldn't process your request. Please try again later.",
+            isLoading: false,
+          };
+          return updatedChat;
+        });
+      }
     }
+  
+    setIsSending(false); // Reset sending state
   
     setTimeout(() => {
       scrollToBottom();
     }, 100);
   };
   
+   const textareaRef = useRef(null);
+
+  const handleInputChange = (e) => {
+    setMessage(e.target.value);
+
+    const textarea = textareaRef.current;
+    textarea.style.height = "auto"; // Reset height to recalculate
+    textarea.style.height = `${Math.min(textarea.scrollHeight, 300)}px`; // Adjust dynamically
+  };
 
   const groupChatsByDate = (chats) => {
     const groupedChats = {};
@@ -314,6 +348,18 @@ const Albert = () => {
     }
   };
 
+  const handleCancelMessage = () => {
+    if (abortControllerRef.current) {
+      abortControllerRef.current.abort(); // Cancel the API request
+      setIsSending(false);
+    }
+  };
+
+  const handleCancelClick = () => {
+    handleCancelMessage();
+    setIsSending(false);
+  };
+
   return (
     <div className="albert-container">
       {/* Sidebar */}
@@ -468,7 +514,7 @@ const Albert = () => {
       <div className="albert-main-content">
         {!messageSent && chat.length === 0 && (
           <>
-            <h1 className="AlHeader">Albert, your AI Ally</h1>
+            <h1 className="AlHeader">Albert, your marketing Ally</h1>
             <p className="AlAsk">How can I help you today?</p>
           </>
         )}
@@ -525,14 +571,20 @@ const Albert = () => {
 
           <div className="inputs">
             <textarea
+              ref={textareaRef}
               placeholder="Message Albert"
               className="albert-textarea"
               value={message}
               rows="1"
-              onChange={(e) => setMessage(e.target.value)}
+              onChange={handleInputChange}
               onKeyDown={handleKeyDown}
-              
-            ></textarea>
+              style={{
+                maxHeight: "300px",
+                minHeight: "40px",
+                overflowY: "auto",
+                resize: "none",
+              }}
+            />
 
             {/* File Upload */}
             <input
@@ -549,18 +601,40 @@ const Albert = () => {
               onClick={() => fileInputRef.current.click()}
             />
 
-            <ArrowUp
-              className="albert-send-icon"
-              style={{ backgroundColor: message.trim() || imagePreviews.length > 0 ? "#2d44f0" : "#ccc" }}
-              onClick={handleSendMessage}
-            />
-          </div>
-        </div>
-      </div>
-      <div className="Al-floating-squares-container">
-        {[...Array(20)].map((_, index) => (
-          <div key={index} className="Al-floating-square"></div>
-        ))}
+            {isSending ? (
+                    <Square
+                      className="albert-stop-icon"
+                      style={{
+                        backgroundColor: "#088a6a",
+                        color: "white",
+                        padding: "5px",
+                        borderRadius: "50%",
+                        cursor: "pointer",
+                      }}
+                      onClick={handleCancelClick}
+                      size={30}
+                    />
+                  ) : (
+                    <Send
+                      className="albert-send-icon"
+                      style={{
+                        backgroundColor: message.trim() || imagePreviews.length > 0 ? "#088a6a" : "#ccc",
+                        color: message.trim() || imagePreviews.length > 0 ? "white" : "black",
+                        padding: "5px",
+                        borderRadius: "50%",
+                        cursor: "pointer",
+                      }}
+                      onClick={handleSendMessage}
+                      size={26}
+                    />
+                  )}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="Al-floating-squares-container">
+                    {[...Array(20)].map((_, index) => (
+                      <div key={index} className="Al-floating-square"></div>
+                    ))}
       </div>
     </div>
   );
