@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { MessageSquarePlus, History, Menu, Paperclip, ArrowUp, ArrowDown, Atom, Globe, User, X, Settings, Trash2, Mail, LogOut,} from "lucide-react";
+import { MessageSquarePlus, History, Menu, Paperclip, ArrowUp, ArrowDown, User, X, Settings, Trash2, Mail, LogOut,} from "lucide-react";
 import "./Ai.css";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../index"; // Import Firebase auth
@@ -15,9 +15,9 @@ const Albert = () => {
   const [uploadProgress, setUploadProgress] = useState({});
   const chatBoxRef = useRef(null);
   const fileInputRef = useRef(null);
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
+  const [name, setName] = useState("Sallo Samuel");
+  const [email, setEmail] = useState("robert***@gmail.com");
+  const [phone, setPhone] = useState("0257256751");
   const [edited, setEdited] = useState(false);
   const [chatHistory, setChatHistory] = useState([]);
   const [showHistory, setShowHistory] = useState(false);
@@ -25,8 +25,9 @@ const Albert = () => {
   const [showModal, setShowModal] = useState(false);
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  //const [isLoading, setIsLoading] = useState(false);
 
-  const DEEPSEEK_API_KEY = "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"; // Replace with your actual API key
+  const DEEPSEEK_API_KEY = "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"; // Replace with your actual API key
   const DEEPSEEK_API_URL = "https://openrouter.ai/api/v1/chat/completions"; // Replace with the actual API endpoint
 
   const handelContactUs = () =>{
@@ -63,31 +64,39 @@ const Albert = () => {
   const handleSendMessage = async () => {
     if (message.trim() === "" && imagePreviews.length === 0) return;
   
-    let newMessages = [];
-    if (message.trim()) {
-      newMessages.push({ sender: "user", text: message });
-    }
-    if (imagePreviews.length > 0) {
-      newMessages.push({ sender: "user", images: [...imagePreviews] });
-    }
+    // Create a new user message
+    const newUserMessage = {
+      sender: "user",
+      text: message.trim(),
+      images: imagePreviews.length > 0 ? [...imagePreviews] : undefined,
+    };
   
-    const updatedChat = [...chat, ...newMessages];
-    setChat(updatedChat);
+    // Immediately update the chat with the user's message
+    setChat((prevChat) => [...prevChat, newUserMessage]);
     setMessage("");
     setImagePreviews([]);
     setMessageSent(true);
+  
+    // Add a temporary AI message with isLoading: true
+    const tempAIMessage = {
+      sender: "ai",
+      text: "",
+      isLoading: true,
+    };
+  
+    setChat((prevChat) => [...prevChat, tempAIMessage]);
   
     try {
       console.log("Sending request to DeepSeek API...");
       const response = await axios.post(
         DEEPSEEK_API_URL,
         {
-          model: "deepseek-chat", // Replace with the correct model name
+          model: "deepseek/deepseek-r1:free",
           messages: [{ role: "user", content: message }],
         },
         {
           headers: {
-            "Authorization": `Bearer ${DEEPSEEK_API_KEY}`,
+            Authorization: `Bearer ${DEEPSEEK_API_KEY}`,
             "Content-Type": "application/json",
           },
         }
@@ -96,42 +105,28 @@ const Albert = () => {
       console.log("API Response:", response.data);
   
       const aiResponse = response.data.choices[0].message.content;
-      const updatedChatWithAI = [...updatedChat, { sender: "ai", text: aiResponse }];
-      setChat(updatedChatWithAI);
   
-      if (activeChat) {
-        const updatedHistory = chatHistory.map((chatItem) =>
-          chatItem.id === activeChat.id ? { ...chatItem, messages: updatedChatWithAI } : chatItem
-        );
-        setChatHistory(updatedHistory);
-        setActiveChat({ ...activeChat, messages: updatedChatWithAI });
-      } else {
-        const newChat = {
-          id: Date.now(),
-          title: updatedChat[0].text || "New Chat",
-          messages: updatedChatWithAI,
-          timestamp: new Date().toISOString(),
-        };
-        setChatHistory([...chatHistory, newChat]);
-        setActiveChat(newChat);
-      }
+      // Replace the temporary AI message with the actual response
+      setChat((prevChat) => {
+        const updatedChat = [...prevChat];
+        updatedChat[updatedChat.length - 1] = { sender: "ai", text: aiResponse, isLoading: false };
+        return updatedChat;
+      });
+  
     } catch (error) {
       console.error("Error calling DeepSeek API:", error);
-      if (error.response) {
-        console.error("API Response Error:", error.response.data);
-      } else if (error.request) {
-        console.error("No response received:", error.request);
-      } else {
-        console.error("Error:", error.message);
-      }
-      const updatedChatWithAI = [...updatedChat, { sender: "ai", text: "Sorry, I couldn't process your request. Please try again later." }];
-      setChat(updatedChatWithAI);
+      setChat((prevChat) => {
+        const updatedChat = [...prevChat];
+        updatedChat[updatedChat.length - 1] = { sender: "ai", text: "Sorry, I couldn't process your request. Please try again later.", isLoading: false };
+        return updatedChat;
+      });
     }
   
     setTimeout(() => {
       scrollToBottom();
     }, 100);
   };
+  
 
   const groupChatsByDate = (chats) => {
     const groupedChats = {};
@@ -148,24 +143,23 @@ const Albert = () => {
   
     return groupedChats;
   };
-  
 
-
-  const handleNewChat = () => {
-    if (chat.length > 0) {
-      // ✅ Only save the chat if it wasn't already in history
-      if (!activeChat) {
-        const chatTitle = chat[0].text || "Untitled Chat";
-        setChatHistory([...chatHistory, { id: Date.now(), title: chatTitle, messages: chat }]);
-      }
+ const handleNewChat = () => {
+  if (chat.length > 0) {
+    // ✅ Only save the chat if it wasn't already in history
+    if (!activeChat) {
+      const chatTitle = chat[0].text || "Untitled Chat";
+      setChatHistory([...chatHistory, { id: Date.now(), title: chatTitle, messages: chat }]);
     }
+  }
 
-    setChat([]);
-    setMessage("");
-    setImagePreviews([]);
-    setMessageSent(false);
-    setActiveChat(null); // ✅ Reset active chat when starting a new one
-  };
+  setChat([]);
+  setMessage("");
+  setImagePreviews([]);
+  setMessageSent(false);
+  setActiveChat(null); // ✅ Reset active chat when starting a new one
+  setShowScrollButton(false); // ✅ Reset the scroll button state
+};
 
 
   const handleKeyDown = (e) => {
@@ -290,12 +284,12 @@ const Albert = () => {
   };
 
   const loadChat = (chatItem) => {
-    setActiveChat(chatItem);  // ✅ Track which chat is active
-    setChat(chatItem.messages);
-    setMessageSent(true);
-    setShowHistory(false);
-    
-  };
+  setActiveChat(chatItem);  // ✅ Track which chat is active
+  setChat(chatItem.messages);
+  setMessageSent(true);
+  setShowHistory(false);
+  setShowScrollButton(false); // ✅ Reset the scroll button state
+};
 
   const handleDeleteAccount = async () => {
     try {
@@ -474,7 +468,7 @@ const Albert = () => {
       <div className="albert-main-content">
         {!messageSent && chat.length === 0 && (
           <>
-            <h1 className="AlHeader">Hi, I&apos;m Albert.</h1>
+            <h1 className="AlHeader">Albert, your AI Ally</h1>
             <p className="AlAsk">How can I help you today?</p>
           </>
         )}
@@ -489,10 +483,18 @@ const Albert = () => {
                 msg.images.map((img, i) => (
                   <img key={i} src={img} alt="Uploaded" className="sent-image" />
                 ))}
+        
+              {/* Show loading bubbles only for AI messages with isLoading true */}
+              {msg.sender === "ai" && msg.isLoading && (
+                <div className="loading-bubbles">
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                </div>
+              )}
             </div>
           ))}
         </div>
-
         )}
 
         {/* Scroll to Bottom Button */}
@@ -552,10 +554,6 @@ const Albert = () => {
               style={{ backgroundColor: message.trim() || imagePreviews.length > 0 ? "#2d44f0" : "#ccc" }}
               onClick={handleSendMessage}
             />
-          </div>
-          <div className="albert-buttons">
-            <button className="albert-deepthink-btn"><Atom />DeepThink (R1)</button>
-            <button className="albert-search-btn"><Globe />Search</button>
           </div>
         </div>
       </div>
