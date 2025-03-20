@@ -66,6 +66,9 @@ const Albert = () => {
   const handleSendMessage = async () => {
     if (message.trim() === "" && imagePreviews.length === 0) return;
   
+    // Check if this is a new conversation (chat is empty)
+    const isNewConversation = chat.length === 0;
+  
     // Create a new user message
     const newUserMessage = {
       sender: "user",
@@ -80,6 +83,20 @@ const Albert = () => {
     setMessageSent(true);
     setIsSending(true); // Set sending state
   
+    // If this is a new conversation, save it to history immediately
+    if (isNewConversation) {
+      const chatTitle = newUserMessage.text || "Untitled Chat"; // Use the first message as the title
+      const newChat = {
+        id: Date.now(), // Unique ID for the chat
+        title: chatTitle,
+        messages: [newUserMessage], // Save the user's message
+        timestamp: new Date(), // Add a timestamp for grouping by date
+      };
+  
+      // Add the new chat to the chat history
+      setChatHistory((prevHistory) => [...prevHistory, newChat]);
+    }
+  
     // Add a temporary AI message with isLoading: true
     const tempAIMessage = {
       sender: "ai",
@@ -91,7 +108,7 @@ const Albert = () => {
   
     // Create a new abort controller
     abortControllerRef.current = new AbortController();
-    
+  
     try {
       console.log("Sending request to DeepSeek API...");
       const response = await axios.post(
@@ -119,15 +136,25 @@ const Albert = () => {
         return updatedChat;
       });
   
+      // If this is a new conversation, update the chat history with the AI's response
+      if (isNewConversation) {
+        setChatHistory((prevHistory) => {
+          const updatedHistory = [...prevHistory];
+          const lastChat = updatedHistory[updatedHistory.length - 1];
+          lastChat.messages = [...lastChat.messages, { sender: "ai", text: aiResponse }]; // Add AI's response
+          return updatedHistory;
+        });
+      }
     } catch (error) {
-      if (axios.isCancel(error)) { // Check if the request was canceled
+      if (axios.isCancel(error)) {
+        // Check if the request was canceled
         console.log("Message sending canceled.");
         setChat((prevChat) => {
           const updatedChat = [...prevChat];
-          updatedChat[updatedChat.length - 1] = { 
-            sender: "ai", 
-            text: "Couldn't get your message.", 
-            isLoading: false 
+          updatedChat[updatedChat.length - 1] = {
+            sender: "ai",
+            text: "Couldn't get your message.",
+            isLoading: false,
           };
           return updatedChat;
         });
