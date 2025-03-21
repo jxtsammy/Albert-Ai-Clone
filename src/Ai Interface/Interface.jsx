@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { MessageSquarePlus, History, Menu, Paperclip, Send, ArrowDown, User, X, Settings, Trash2, Mail, LogOut, Square} from "lucide-react";
+import { MessageSquarePlus, History, Menu, Paperclip, Send, ArrowDown, User, X, Settings, Trash2, Mail, LogOut, Square, } from "lucide-react";
 import "./Ai.css";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../index"; // Import Firebase auth
@@ -116,6 +116,7 @@ const Albert = () => {
         {
           model: "deepseek/deepseek-r1:free",
           messages: [{ role: "user", content: message }],
+          
         },
         {
           headers: {
@@ -206,14 +207,6 @@ const Albert = () => {
   };
 
  const handleNewChat = () => {
-  if (chat.length > 0) {
-    // ✅ Only save the chat if it wasn't already in history
-    if (!activeChat) {
-      const chatTitle = chat[0].text || "Untitled Chat";
-      setChatHistory([...chatHistory, { id: Date.now(), title: chatTitle, messages: chat }]);
-    }
-  }
-
   setChat([]);
   setMessage("");
   setImagePreviews([]);
@@ -551,12 +544,11 @@ const Albert = () => {
           <div className="albert-chat-box" ref={chatBoxRef} onScroll={handleScroll}>
           {(activeChat ? activeChat.messages : chat).map((msg, index) => (
             <div key={index} className={`chat-message ${msg.sender}`}>
-              {msg.text && <p>{msg.text}</p>}
               {msg.images &&
                 msg.images.map((img, i) => (
                   <img key={i} src={img} alt="Uploaded" className="sent-image" />
-                ))}
-        
+              ))}
+              {msg.text && <p>{msg.text}</p>}
               {/* Show loading bubbles only for AI messages with isLoading true */}
               {msg.sender === "ai" && msg.isLoading && (
                 <div className="loading-bubbles">

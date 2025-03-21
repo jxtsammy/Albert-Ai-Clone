@@ -8,13 +8,12 @@ Albert.ai Clone was created by CodeX Technologies in 2025.
 
 ## Features
 
-- **Autonomous Campaign Management**: Albert optimizes and manages digital marketing campaigns without constant manual intervention.
 - **AI-Driven Insights**: Provides actionable insights based on real-time data analysis.
 - **Seamless Integration**: Easily connects with existing marketing tech stacks.
 - **Continuous Learning**: Self-improves based on campaign performance and user feedback.
 
 ## License
 
-This project is licensed under the CS3 AI Projects - see the LICENSE file for details.
+This project is licensed under the Computer Science Year 3 AI min Projects, KNUST
 
 ## Contact
